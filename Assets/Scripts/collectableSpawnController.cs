@@ -74,6 +74,7 @@ public class collectableSpawnController : MonoBehaviour
         float newx, newy, newz;
         //generate x, y and z accordingly to the value set by previous methods
         //TEMPORARILY
+
         newx = Random.Range(0, 10);
         newy = 2;
         newz = Random.Range(0, 10);

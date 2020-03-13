@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1007701381}
   - component: {fileID: 1007701380}
   - component: {fileID: 1007701379}
+  - component: {fileID: 91873349455708499}
   m_Layer: 0
-  m_Name: fbxHotdog
+  m_Name: Hotdog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,3 +93,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438341fe86630ce47bace84a1589c2aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &91873349455708499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007701378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbaaddf5d3b75f94197e3d513b95bdab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 10

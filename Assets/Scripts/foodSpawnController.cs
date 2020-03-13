@@ -6,7 +6,7 @@ public class foodSpawnController : MonoBehaviour
 {
 
     private int totalFoodCount;         //a total count of all food items present in the scene
-    private int foodCountThreshold;     //a max number of food in the scene
+    public int foodCountThreshold;     //a max number of food in the scene
     private float nextSpawnTime;        //next spawn time.
     public float spawnDelay;            //a pause between two consequent spawns
 
@@ -34,9 +34,9 @@ public class foodSpawnController : MonoBehaviour
     private void Spawn()
     {
         nextSpawnTime= Time.time + spawnDelay;//
-        var obj;
-        int randNum = Random.Range(0, 1);
-        if(randNum)
+        GameObject obj;
+        int randNum = Random.Range(0, 2);
+        if(randNum == 1)
             obj = Instantiate(prefab1, generatePosition(), rot);
         else
             obj = Instantiate(prefab2, generatePosition(), rot);
@@ -50,9 +50,9 @@ public class foodSpawnController : MonoBehaviour
         float newx, newy, newz;
         //generate x, y and z accordingly to the value set by previous methods
         //TEMPORARILY
-        newx = Random.Range(0, 10);
+        newx = Random.Range(-139, 139);
         newy = 2;
-        newz = Random.Range(0, 10);
+        newz = Random.Range(-139, 139);
 
         return new Vector3(newx, newy, newz);
     }
