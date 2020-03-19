@@ -16,7 +16,7 @@ public class AgentController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        count = 0;
+        points = 0;
         health = 100.0f;
         satiety = 70.0f;
         hydration = 70.0f;
