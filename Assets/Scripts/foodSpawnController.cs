@@ -19,7 +19,11 @@ public class foodSpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //fill the arena before anyone can grab items
+        for(int i = 0; i < foodCountThreshold; i++)
+        {
+            Spawn();
+        }
     }
 
     // Update is called once per frame

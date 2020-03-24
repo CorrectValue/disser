@@ -32,7 +32,23 @@ public class collectableSpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //fill the arena with all types of objects
+        for (int i = 0; i < commonObjectsThreshold; i++)
+        {
+            Spawn(1, ref commonNextSpawnTime, ref commonObjectsCount, commonSpawnDelay);
+        }
+        for (int i = 0; i < uncommonObjectsThreshold; i++)
+        {
+            Spawn(3, ref uncommonNextSpawnTime, ref uncommonObjectsCount, uncommonSpawnDelay);
+        }
+        for (int i = 0; i < rareObjectsThreshold; i++)
+        {
+            Spawn(5, ref rareSpawnDelay, ref rareObjectsCount, rareSpawnDelay);
+        }
+        for (int i = 0; i < legendaryObjectsThreshold; i++)
+        {
+            Spawn(10, ref legendaryNextSpawnTime, ref legendaryObjectsCount, legendarySpawnDelay);
+        }
     }
 
     // Update is called once per frame
@@ -41,19 +57,19 @@ public class collectableSpawnController : MonoBehaviour
         //consequently check all types of objects 
         if(shouldSpawn(commonObjectsCount, commonObjectsThreshold, commonSpawnDelay, ref commonNextSpawnTime))
         {
-            Spawn(1, ref commonNextSpawnTime, ref commonObjectsCount, commonSpawnDelay);/////
+            Spawn(1, ref commonNextSpawnTime, ref commonObjectsCount, commonSpawnDelay);
         }
         if (shouldSpawn(uncommonObjectsCount, uncommonObjectsThreshold, uncommonSpawnDelay, ref uncommonNextSpawnTime))
         {
-            Spawn(3, ref uncommonNextSpawnTime, ref uncommonObjectsCount, uncommonSpawnDelay);/////
+            Spawn(3, ref uncommonNextSpawnTime, ref uncommonObjectsCount, uncommonSpawnDelay);
         }
         if (shouldSpawn(rareObjectsCount, rareObjectsThreshold, rareSpawnDelay, ref rareNextSpawnTime))
         {
-            Spawn(5, ref rareSpawnDelay, ref rareObjectsCount, rareSpawnDelay);/////
+            Spawn(5, ref rareSpawnDelay, ref rareObjectsCount, rareSpawnDelay);
         }
         if (shouldSpawn(legendaryObjectsCount, legendaryObjectsThreshold, legendarySpawnDelay, ref legendaryNextSpawnTime))
         {
-            Spawn(10, ref legendaryNextSpawnTime, ref legendaryObjectsCount, legendarySpawnDelay);/////
+            Spawn(10, ref legendaryNextSpawnTime, ref legendaryObjectsCount, legendarySpawnDelay);
         }
     }
 

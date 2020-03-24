@@ -16,7 +16,11 @@ public class medkitSpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        //set initial filling of the arena
+        for (int i = 0; i < medkitCountThreshold; i++)
+        {
+            Spawn();
+        }
     }
 
     // Update is called once per frame

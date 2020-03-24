@@ -16,7 +16,10 @@ public class waterSpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < waterCountThreshold; i++)
+        {
+            Spawn();
+        }
     }
 
     // Update is called once per frame
