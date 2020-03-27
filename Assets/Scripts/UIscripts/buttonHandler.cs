@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class buttonHandler : MonoBehaviour
 {
     private GameObject foodSlider, waterSlider, spawnRateSlider, pointCountSlider, simTimeSlider;
-    private GameObject spawner;
+    private GameObject spawner, controller;
     private GameObject foodSpawnController;
     private float foodValue, waterValue, pointCountValue, spawnRateValue, simTimeValue;
 
@@ -21,11 +22,22 @@ public class buttonHandler : MonoBehaviour
         simTimeSlider = GameObject.Find("simTimeSlider");
 
         //get in-game objects to set data
+        //until the scene is loaded, these objects do not exist!
+        //придумай что-нибудь новое
         spawner = GameObject.Find("Spawner");
-
+        controller = GameObject.Find("ControlObject");
     }
 
-    public void get()
+    public void handle()
+    {
+        //toggle the necessary methods
+        get();
+        set();
+        //switch scene
+        nextScene();
+    }
+
+    private void get()
     {
         //get data from inputs
         foodValue = foodSlider.GetComponent<Slider>().value;
@@ -35,7 +47,7 @@ public class buttonHandler : MonoBehaviour
         simTimeValue = simTimeSlider.GetComponent<Slider>().value;
     }
 
-    public void set()
+    private void set()
     {
         //sets all the parameters from fields of input
         //set food and water spawn thresholds
@@ -55,6 +67,11 @@ public class buttonHandler : MonoBehaviour
         spawner.GetComponent<collectableSpawnController>().legendarySpawnDelay /= (int)spawnRateValue;
         spawner.GetComponent<medkitSpawnController>().spawnDelay /= (int)spawnRateValue;
         //set simulation time
-        //как-нибудь потом.
+        controller.GetComponent<timer>().simulationTime = simTimeValue;
+    }
+
+    private void nextScene()
+    {
+        SceneManager.LoadScene("Assets/Scenes/scene");
     }
 }
