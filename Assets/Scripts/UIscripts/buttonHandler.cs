@@ -52,38 +52,17 @@ public class buttonHandler : MonoBehaviour
 
     private void set()
     {
-        //sets all the parameters from fields of input
-        //set food and water spawn thresholds
-        //spawner.GetComponent<foodSpawnController>().foodCountThreshold = (int)foodValue;
-        //spawner.GetComponent<waterSpawnController>().waterCountThreshold = (int)waterValue;
-        ////set points spawn thresholds
-        //spawner.GetComponent<collectableSpawnController>().legendaryObjectsThreshold = (int)(pointCountValue / 10);
-        //spawner.GetComponent<collectableSpawnController>().rareObjectsThreshold = (int)(pointCountValue / 5);
-        //spawner.GetComponent<collectableSpawnController>().uncommonObjectsThreshold = (int)(pointCountValue * 0.3f);
-        //spawner.GetComponent<collectableSpawnController>().commonObjectsThreshold = (int)(pointCountValue - pointCountValue / 10 - pointCountValue / 5 - pointCountValue * 0.3f);
-        ////set spawn rate 
-        //spawner.GetComponent<foodSpawnController>().spawnDelay /= (int)spawnRateValue;
-        //spawner.GetComponent<waterSpawnController>().spawnDelay /= (int)spawnRateValue;
-        //spawner.GetComponent<collectableSpawnController>().commonSpawnDelay /= (int)spawnRateValue;
-        //spawner.GetComponent<collectableSpawnController>().uncommonSpawnDelay /= (int)spawnRateValue;
-        //spawner.GetComponent<collectableSpawnController>().rareSpawnDelay /= (int)spawnRateValue;
-        //spawner.GetComponent<collectableSpawnController>().legendarySpawnDelay /= (int)spawnRateValue;
-        //spawner.GetComponent<medkitSpawnController>().spawnDelay /= (int)spawnRateValue;
-        ////set simulation time
-        //controller.GetComponent<timer>().simulationTime = simTimeValue;
-
         //set values into storage
         storage.GetComponent<dataStorageScript>().foodValue = foodValue;
-        //storage.GetComponent<dataStorageScript>().setFoodValue(foodValue);
-        //storage.GetComponent<dataStorageScript>().setWaterValue(waterValue);
-        //storage.GetComponent<dataStorageScript>().setPointCountValue(pointCountValue);
-        //storage.GetComponent<dataStorageScript>().setSpawnRateValue(spawnRateValue);
-        //storage.GetComponent<dataStorageScript>().setSimTimeValue(simTimeValue);
-
+        storage.GetComponent<dataStorageScript>().waterValue = waterValue;
+        storage.GetComponent<dataStorageScript>().pointCountValue = pointCountValue;
+        storage.GetComponent<dataStorageScript>().spawnRateValue = spawnRateValue;
+        storage.GetComponent<dataStorageScript>().simTimeValue = simTimeValue;
     }
 
     private void nextScene()
     {
+        DontDestroyOnLoad(storage); //save this object in memory to read data in the next scene
         SceneManager.LoadScene("Scenes/scene");
     }
 }
