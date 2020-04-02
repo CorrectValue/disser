@@ -7,10 +7,10 @@ public class dataReader : MonoBehaviour
     private GameObject storage, spawner, controller;
     private float foodValue, waterValue, spawnRateValue, simTimeValue, pointCountValue;
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         //make references to necessary objects
-        storage = GameObject.Find("dataStorage");
+        storage = GameObject.Find("DataStorage");
         spawner = GameObject.Find("Spawner");
         controller = GameObject.Find("ControlObject");
         //read data from data storage

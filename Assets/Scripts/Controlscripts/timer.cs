@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class timer : MonoBehaviour
 {
@@ -23,7 +24,19 @@ public class timer : MonoBehaviour
         if(simulationTime < 0)
         {
             //time to stop
-            //как-нибудь в другой раз.
+            stopSimulation();
         }
+    }
+
+    void stopSimulation()
+    {
+        //the simulation stops and the next scene must be loaded
+        //thus, we need to store all the data to use it later
+    }
+
+    void switchScene()
+    {
+        //after everything has been stored, go to the last scene
+        SceneManager.LoadScene("Scenes/endMenu");
     }
 }

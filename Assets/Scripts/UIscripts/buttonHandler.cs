@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class buttonHandler : MonoBehaviour
 {
     private GameObject foodSlider, waterSlider, spawnRateSlider, pointCountSlider, simTimeSlider;
-    //  private GameObject spawner, controller;
     private GameObject storage;
     private GameObject foodSpawnController;
     private float foodValue, waterValue, pointCountValue, spawnRateValue, simTimeValue;
@@ -22,12 +21,7 @@ public class buttonHandler : MonoBehaviour
         spawnRateSlider = GameObject.Find("spawnRateSlider");
         simTimeSlider = GameObject.Find("simTimeSlider");
 
-        //get in-game objects to set data
-        //until the scene is loaded, these objects do not exist!
-        //придумай что-нибудь новое
         //for now, data will be stored in the storage unit 
-        // spawner = GameObject.Find("Spawner");
-        //  controller = GameObject.Find("ControlObject");
         storage = GameObject.Find("DataStorage");
     }
 
@@ -62,7 +56,6 @@ public class buttonHandler : MonoBehaviour
 
     private void nextScene()
     {
-        DontDestroyOnLoad(storage); //save this object in memory to read data in the next scene
         SceneManager.LoadScene("Scenes/scene");
     }
 }
