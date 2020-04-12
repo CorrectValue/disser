@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,11 +27,12 @@ public class timer : MonoBehaviour
         simulationTime -= Time.deltaTime;
         //before showing time to user, need to convert it into more suitable format
 
-        timerText.text = simulationTime.ToString();
+        timerText.text = GenTimeSpanFromSeconds(simulationTime);
 
         if(simulationTime < 0)
         {
             //time to stop
+            simulationTime = 0;
             stopSimulation();
         }
     }
@@ -50,7 +52,7 @@ public class timer : MonoBehaviour
         SceneManager.LoadScene("Scenes/endMenu");
     }
 
-    static void GenTimeSpanFromSeconds(double seconds)
+    static string GenTimeSpanFromSeconds(double seconds)
     {
         //need a method to convert time from float to actual minutes and seconds
         // Create a TimeSpan object and TimeSpan string from 
@@ -58,12 +60,13 @@ public class timer : MonoBehaviour
         TimeSpan interval = TimeSpan.FromSeconds(seconds);
         string timeInterval = interval.ToString();
 
+        return timeInterval;
         // Pad the end of the TimeSpan string with spaces if it 
         // does not contain milliseconds.
-        int pIndex = timeInterval.IndexOf(':');
-        pIndex = timeInterval.IndexOf('.', pIndex);
-        if (pIndex < 0) timeInterval += "        ";
+        //int pIndex = timeInterval.IndexOf(':');
+        //pIndex = timeInterval.IndexOf('.', pIndex);
+        //if (pIndex < 0) timeInterval += "        ";
 
-        Console.WriteLine("{0,21}{1,26}", seconds, timeInterval);
+        //Console.WriteLine("{0,21}{1,26}", seconds, timeInterval);
     }
 }
