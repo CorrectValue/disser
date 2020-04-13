@@ -5,9 +5,7 @@ using UnityEngine;
 public class AgentController : MonoBehaviour
 {
     private int points;     //how much points has agent collected
-    private float health;   //health points of an agent: zero means death
-    private float satiety;  //means how hungry an agent is: zero means hungry => slowly decreasing HP
-    private float hydration;//means how hydrated an agent is: zero means thirsty => decreasing HP
+    
     private Vector3 destination;
 
     //IMPORTANT
@@ -17,9 +15,7 @@ public class AgentController : MonoBehaviour
     void Start()
     {
         points = 0;
-        health = 100.0f;
-        satiety = 70.0f;
-        hydration = 70.0f;
+        
         
         generateRandomPoint();
     }
