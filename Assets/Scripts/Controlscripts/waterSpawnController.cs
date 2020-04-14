@@ -25,6 +25,7 @@ public class waterSpawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        totalWaterCount = GameObject.FindGameObjectsWithTag("water").Length;
         if (shouldSpawn())
         {
             Spawn();

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class collectableSpawnController : MonoBehaviour
 {
-
     private int commonObjectsCount;     //count of objects with value 1
     private int uncommonObjectsCount;   //count of objects with value 3
     private int rareObjectsCount;       //count of objects with value 5
@@ -54,8 +53,13 @@ public class collectableSpawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //check real numbers of objects present in the scene
+        commonObjectsCount = GameObject.FindGameObjectsWithTag("collectable1").Length;
+        uncommonObjectsCount = GameObject.FindGameObjectsWithTag("collectable3").Length;
+        rareObjectsCount = GameObject.FindGameObjectsWithTag("collectable5").Length;
+        legendaryObjectsCount = GameObject.FindGameObjectsWithTag("collectable10").Length;
         //consequently check all types of objects 
-        if(shouldSpawn(commonObjectsCount, commonObjectsThreshold, commonSpawnDelay, ref commonNextSpawnTime))
+        if (shouldSpawn(commonObjectsCount, commonObjectsThreshold, commonSpawnDelay, ref commonNextSpawnTime))
         {
             Spawn(1, ref commonNextSpawnTime, ref commonObjectsCount, commonSpawnDelay);
         }

@@ -29,6 +29,8 @@ public class foodSpawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //get real number of food presented in the scene 
+        totalFoodCount = GameObject.FindGameObjectsWithTag("food").Length;
         if (shouldSpawn())
         {
             Spawn();

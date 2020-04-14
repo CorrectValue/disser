@@ -26,6 +26,7 @@ public class medkitSpawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        totalMedkitCount = GameObject.FindGameObjectsWithTag("medkit").Length;
         if (shouldSpawn())
         {
             Spawn();

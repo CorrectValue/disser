@@ -12,7 +12,13 @@ public class agentStateController : MonoBehaviour
     public float health;   //health points of an agent: zero means death
     public float satiety;  //means how hungry an agent is: zero means hungry => slowly decreasing HP
     public float hydration;//means how hydrated an agent is: zero means thirsty => decreasing HP
-    public float points; //sum of points collected by agent
+    public int points; //sum of points collected by agent
+
+    //maximum values 
+    private float maxHealth; 
+    private float maxSatiety;
+    private float maxHydration;
+    
 
     //thresholds for values above - different for different populations
     private float satietyThreshold;
@@ -26,6 +32,35 @@ public class agentStateController : MonoBehaviour
         health = 100.0f;
         satiety = 70.0f;
         hydration = 70.0f;
+
+        //initialize thresholds
+        //we have a unified interface which means it's urgent to get the type of the population from a different script
+        //here, clever agent acts like a balanced one and has somewhat balanced thresholds
+        //cautious agent has higher thresholds which means he will be eating more often "just in case"
+        //risky agent has the lowest values - he basically does not care about it
+        switch(gameObject.GetComponent<agentType>().type)
+        {
+            case 0:
+                //an agent belongs to the clever population
+                satietyThreshold = 30.0f;
+                hydrationThreshold = 30.0f;
+                break;
+            case 1:
+                //an agent belongs to the cautious population
+                satietyThreshold = 50.0f;
+                hydrationThreshold = 60.0f;
+                break;
+            case 2:
+                //an agent belongs to the balanced population
+                satietyThreshold = 30.0f;
+                hydrationThreshold = 30.0f;
+                break;
+            case 3:
+                //an agent belongs to the risky population
+                satietyThreshold = 10.0f;
+                hydrationThreshold = 15.0f;
+                break;
+        }
     }
 
     // Update is called once per frame
@@ -72,5 +107,35 @@ public class agentStateController : MonoBehaviour
     void die()
     {
         //if health falls below zero, the agent is dead (or stunned)
+    }
+
+    void eat(float value)
+    {
+        //an agent has found something to eat
+        satiety += value;
+        if (satiety > maxSatiety)
+            satiety = maxSatiety;
+    }
+
+    void drink(float value)
+    {
+        //an agent has found something to drink
+        hydration += value;
+        if (hydration > maxHydration)
+            hydration = maxHydration;
+    }
+
+    void heal(float value)
+    {
+        //an agent has found a medkit
+        health += value;
+        if (health > maxHealth)
+            health = maxHealth;
+    }
+
+    void earnPoint(int value)
+    {
+        //an agent has found a collectable object
+        points += value;
     }
 }
