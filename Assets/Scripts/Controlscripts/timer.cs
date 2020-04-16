@@ -15,7 +15,7 @@ public class timer : MonoBehaviour
     void Start()
     {
         //set sim time
-        simulationTime = 10; //temporarily
+        //simulationTime = 10; //temporarily
         //find text object to set text into
         timerText = GameObject.Find("timerText").GetComponent<Text>();
     }

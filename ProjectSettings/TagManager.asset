@@ -6,6 +6,13 @@ TagManager:
   tags:
   - collectible
   - CollectibleVision
+  - medkit
+  - water
+  - collectable1
+  - collectable3
+  - collectable5
+  - collectable10
+  - food
   layers:
   - Default
   - TransparentFX

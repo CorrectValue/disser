@@ -38,6 +38,8 @@ public class medkitSpawnController : MonoBehaviour
         nextSpawnTime = Time.time + spawnDelay;//
         GameObject obj;
         obj = Instantiate(prefab1, generatePosition(), rot);
+        //set tag
+        obj.gameObject.tag = "medkit";
         //increase counter
         totalMedkitCount++;
     }

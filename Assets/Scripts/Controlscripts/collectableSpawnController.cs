@@ -82,6 +82,8 @@ public class collectableSpawnController : MonoBehaviour
         //generatePosition();
         spawnTime = Time.time + spawnDelay;//
         var obj = Instantiate(prefab, generatePosition(value), rot);
+        //set tag
+        obj.gameObject.tag = "collectable" + value.ToString();
         var scr = obj.GetComponent<collectableController>();
         scr.value = value;
         //increase counter

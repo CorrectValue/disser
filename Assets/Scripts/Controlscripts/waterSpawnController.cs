@@ -37,6 +37,8 @@ public class waterSpawnController : MonoBehaviour
         GameObject obj;
         int randNum = Random.Range(0, 2);
         obj = Instantiate(prefab, generatePosition(), rot);
+        //set tag
+        obj.gameObject.tag = "water";
         //increase counter
         totalWaterCount++;
     }

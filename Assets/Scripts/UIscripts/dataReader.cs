@@ -37,7 +37,7 @@ public class dataReader : MonoBehaviour
         spawner.GetComponent<collectableSpawnController>().legendarySpawnDelay /= (int)spawnRateValue;
         spawner.GetComponent<medkitSpawnController>().spawnDelay /= (int)spawnRateValue;
         //set simulation time
-        controller.GetComponent<timer>().simulationTime = simTimeValue;
+        controller.GetComponent<timer>().simulationTime = simTimeValue * 60; //converting minutes to seconds
     }
 
 }

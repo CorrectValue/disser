@@ -46,6 +46,8 @@ public class foodSpawnController : MonoBehaviour
             obj = Instantiate(prefab1, generatePosition(), rot);
         else
             obj = Instantiate(prefab2, generatePosition(), rot);
+        //set tag
+        obj.gameObject.tag = "food";
         //increase counter
         totalFoodCount++;
     }
