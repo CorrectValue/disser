@@ -69,8 +69,24 @@ public class agentStateController : MonoBehaviour
         //recalculate values and check if they are decreased below turning point
         //recaltulate satiety based only on time
         satiety = satiety - Time.deltaTime * 1f; //need to make a better formula
+        if (satiety < 0)
+            satiety = 0;
         //recalculate hydration based on time - but with different coefficients
         hydration = hydration - Time.deltaTime * 1.2f; //for now
+        if (hydration < 0)
+            hydration = 0;
+
+        //if the values of satiety and hydration are above their thresholds, restore HP
+        if(hydration > hydrationThreshold && satiety > satietyThreshold)
+        {
+            //restore HP if needed
+            if(health < maxHealth)
+            {
+                health += Mathf.Sqrt(Mathf.Pow((hydration - hydrationThreshold), 2) + Mathf.Pow((satiety - satietyThreshold), 2));
+                if (health > maxHealth)
+                    health = maxHealth;
+            }
+        }
 
         //now, check if those values have fallen below the threshold
         //if so, need to reset priorities
@@ -87,17 +103,17 @@ public class agentStateController : MonoBehaviour
             //the agent is dying!
         }
         //check if any of the stats has fallen below zero
-        if (health < 0)
+        if (health <= 0)
         {
             //whoops... 
             die();
         }
-        if(satiety < 0)
+        if(satiety == 0)
         {
             //very hungry, start decreasing health
             health = health - Time.deltaTime * 1.3f; //need to make a better formula
         }
-        if(hydration < 0)
+        if(hydration == 0)
         {
             //very thirsty, start decreasing health
             health = health - Time.deltaTime * 1.5f; //need to make a better formula
@@ -109,7 +125,7 @@ public class agentStateController : MonoBehaviour
         //if health falls below zero, the agent is dead (or stunned)
     }
 
-    void eat(float value)
+    public void eat(float value)
     {
         //an agent has found something to eat
         satiety += value;
@@ -117,7 +133,7 @@ public class agentStateController : MonoBehaviour
             satiety = maxSatiety;
     }
 
-    void drink(float value)
+    public void drink(float value)
     {
         //an agent has found something to drink
         hydration += value;
@@ -125,7 +141,7 @@ public class agentStateController : MonoBehaviour
             hydration = maxHydration;
     }
 
-    void heal(float value)
+    public void heal(float value)
     {
         //an agent has found a medkit
         health += value;
@@ -133,7 +149,7 @@ public class agentStateController : MonoBehaviour
             health = maxHealth;
     }
 
-    void earnPoint(int value)
+    public void earnPoint(int value)
     {
         //an agent has found a collectable object
         points += value;

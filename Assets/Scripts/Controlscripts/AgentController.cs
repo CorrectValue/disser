@@ -14,9 +14,6 @@ public class AgentController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        points = 0;
-        
-        
         generateRandomPoint();
     }
 
