@@ -1522,7 +1522,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: Clever
 --- !u!222 &468320172
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2264,6 +2264,8 @@ MonoBehaviour:
   pointCountValue: 0
   spawnRateValue: 0
   simTimeValue: 0
+  selected1: 0
+  selected2: 0
 --- !u!4 &915858732
 Transform:
   m_ObjectHideFlags: 0
@@ -2675,11 +2677,13 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: Clever
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: Cautious
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: Balanced
+      m_Image: {fileID: 0}
+    - m_Text: Risky
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3572,14 +3576,16 @@ MonoBehaviour:
   m_CaptionImage: {fileID: 0}
   m_ItemText: {fileID: 1804041176}
   m_ItemImage: {fileID: 0}
-  m_Value: 0
+  m_Value: 2
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: Clever
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: Cautious
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: Balanced
+      m_Image: {fileID: 0}
+    - m_Text: Risky
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5877,7 +5883,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Option A
+  m_Text: Balanced
 --- !u!222 &2053419379
 CanvasRenderer:
   m_ObjectHideFlags: 0

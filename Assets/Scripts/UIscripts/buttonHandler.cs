@@ -7,9 +7,11 @@ using UnityEngine.SceneManagement;
 public class buttonHandler : MonoBehaviour
 {
     private GameObject foodSlider, waterSlider, spawnRateSlider, pointCountSlider, simTimeSlider;
+    private GameObject drop1, drop2; //dropdowns to select contestants from
     private GameObject storage;
     private GameObject foodSpawnController;
     private float foodValue, waterValue, pointCountValue, spawnRateValue, simTimeValue;
+    private int selected1, selected2;
 
     void Start()
     {
@@ -20,6 +22,9 @@ public class buttonHandler : MonoBehaviour
         pointCountSlider = GameObject.Find("pointCountSlider");
         spawnRateSlider = GameObject.Find("spawnRateSlider");
         simTimeSlider = GameObject.Find("simTimeSlider");
+
+        drop1 = GameObject.Find("contestant1Dropdown");
+        drop2 = GameObject.Find("contestant2Dropdown");
 
         //for now, data will be stored in the storage unit 
         storage = GameObject.Find("DataStorage");
@@ -42,6 +47,9 @@ public class buttonHandler : MonoBehaviour
         pointCountValue = pointCountSlider.GetComponent<Slider>().value;
         spawnRateValue = spawnRateSlider.GetComponent<Slider>().value;
         simTimeValue = simTimeSlider.GetComponent<Slider>().value;
+
+        selected1 = drop1.GetComponent<Dropdown>().value;
+        selected2 = drop2.GetComponent<Dropdown>().value;
     }
 
     private void set()
@@ -52,6 +60,8 @@ public class buttonHandler : MonoBehaviour
         storage.GetComponent<dataStorageScript>().pointCountValue = pointCountValue;
         storage.GetComponent<dataStorageScript>().spawnRateValue = spawnRateValue;
         storage.GetComponent<dataStorageScript>().simTimeValue = simTimeValue;
+        storage.GetComponent<dataStorageScript>().selected1 = selected1;
+        storage.GetComponent<dataStorageScript>().selected2 = selected2;
     }
 
     private void nextScene()

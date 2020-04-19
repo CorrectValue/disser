@@ -6,4 +6,5 @@ public class dataStorageScript : MonoBehaviour
 {
     //this script is needed to store data obtained from UI in the start menu and pass it to the next scene
     public float foodValue, waterValue, pointCountValue, spawnRateValue, simTimeValue;
+    public int selected1, selected2; //selected contestants
 }

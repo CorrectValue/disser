@@ -6,6 +6,7 @@ public class dataReader : MonoBehaviour
 {
     private GameObject storage, spawner, controller;
     private float foodValue, waterValue, spawnRateValue, simTimeValue, pointCountValue;
+    private int selected1, selected2;
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -19,6 +20,8 @@ public class dataReader : MonoBehaviour
         spawnRateValue = storage.GetComponent<dataStorageScript>().spawnRateValue;
         simTimeValue = storage.GetComponent<dataStorageScript>().simTimeValue;
         pointCountValue = storage.GetComponent<dataStorageScript>().pointCountValue;
+        selected1 = storage.GetComponent<dataStorageScript>().selected1;
+        selected2 = storage.GetComponent<dataStorageScript>().selected2;
         //set values where they belong
         //set food and water spawn thresholds
         spawner.GetComponent<foodSpawnController>().foodCountThreshold = (int)foodValue;
@@ -38,6 +41,9 @@ public class dataReader : MonoBehaviour
         spawner.GetComponent<medkitSpawnController>().spawnDelay /= (int)spawnRateValue;
         //set simulation time
         controller.GetComponent<timer>().simulationTime = simTimeValue * 60; //converting minutes to seconds
+        //set populations to spawn
+        spawner.GetComponent<agentSpawnController>().selected1 = selected1;
+        spawner.GetComponent<agentSpawnController>().selected2 = selected2;
     }
 
 }
