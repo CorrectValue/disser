@@ -7,12 +7,6 @@ public class RotateAndFloat : MonoBehaviour
 {
     float amplitude = 0.0125f;
     float speed = 0.75f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {

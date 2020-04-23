@@ -12,11 +12,6 @@ public class decisionMaker : MonoBehaviour
 
     //we will store all the states here just to make it simpler
     bool hungry, thirsty, dying;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
@@ -36,6 +31,29 @@ public class decisionMaker : MonoBehaviour
         //1 - go find food
         //2 - go find water
         //3 - go find a medkit
-        if()
+        
+        //returning value will be overwritten every time a new condition works
+        int returnValue;
+
+        returnValue = 0; //until any of the conditions work, agent will be simply collecting points
+
+        if(dying)
+        {
+            //need to find a medkit
+            returnValue = 3;
+        }
+        if(hungry)
+        {
+            //need to find food to eat because even on low hp hunger is much more dangerous
+            returnValue = 1;
+        }
+        if(thirsty)
+        {
+            //need to find water asap because thirst kills faster than hunger
+            returnValue = 2;
+        }
+
+        //return decision
+        return returnValue;
     }
 }
