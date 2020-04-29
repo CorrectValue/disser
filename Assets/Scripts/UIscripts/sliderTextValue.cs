@@ -12,6 +12,7 @@ public class sliderTextValue : MonoBehaviour
     void Start()
     {
         sliderText = GetComponent<Text>();
+
     }
 
     // Update is called once per frame
