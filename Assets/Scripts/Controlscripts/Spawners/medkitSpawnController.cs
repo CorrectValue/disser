@@ -9,6 +9,8 @@ public class medkitSpawnController : MonoBehaviour
     private float nextSpawnTime;        //next spawn time.
     public float spawnDelay;            //a pause between two consequent spawns
 
+    private GameObject parent; //parent obj
+
     public GameObject prefab1;
     private Vector3 pos;  //position to spawn to
     private Quaternion rot;  //rotation to spawn
@@ -16,6 +18,8 @@ public class medkitSpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //get parent obj ref
+        parent = GameObject.Find("Medkit");
         //set initial filling of the arena
         for (int i = 0; i < medkitCountThreshold; i++)
         {
@@ -40,6 +44,8 @@ public class medkitSpawnController : MonoBehaviour
         obj = Instantiate(prefab1, generatePosition(), rot);
         //set tag
         obj.gameObject.tag = "medkit";
+        //put into parent
+        obj.transform.parent = parent.transform;
         //increase counter
         totalMedkitCount++;
     }

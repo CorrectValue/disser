@@ -9,6 +9,8 @@ public class waterSpawnController : MonoBehaviour
     private float nextSpawnTime;        //next spawn time.
     public float spawnDelay;            //a pause between two consequent spawns
 
+    private GameObject parent; //parent obj
+
     public GameObject prefab;
 
     private Vector3 pos;  //position to spawn to
@@ -16,6 +18,8 @@ public class waterSpawnController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //get parent obj ref
+        parent = GameObject.Find("Water");
         for (int i = 0; i < waterCountThreshold; i++)
         {
             Spawn();
@@ -39,6 +43,8 @@ public class waterSpawnController : MonoBehaviour
         obj = Instantiate(prefab, generatePosition(), rot);
         //set tag
         obj.gameObject.tag = "water";
+        //put into parent
+        obj.transform.parent = parent.transform;
         //increase counter
         totalWaterCount++;
     }

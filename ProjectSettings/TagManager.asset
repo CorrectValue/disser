@@ -13,6 +13,7 @@ TagManager:
   - collectable5
   - collectable10
   - food
+  - agentText
   layers:
   - Default
   - TransparentFX

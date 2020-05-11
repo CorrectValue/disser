@@ -25,28 +25,35 @@ public class collectableSpawnController : MonoBehaviour
     public float legendarySpawnDelay;
     public GameObject prefab;
 
+    private GameObject col1, col3, col5, col10; //parent objects
+
     private Vector3 pos;  //position to spawn to
     private Quaternion rot;  //rotation to spawn
 
     // Start is called before the first frame update
     void Start()
     {
+        //get parent objects refs
+        col1 = GameObject.Find("Coll1");
+        col3 = GameObject.Find("Coll3");
+        col5 = GameObject.Find("Coll5");
+        col10 = GameObject.Find("Coll10");
         //fill the arena with all types of objects
         for (int i = 0; i < commonObjectsThreshold; i++)
         {
-            Spawn(1, ref commonNextSpawnTime, ref commonObjectsCount, commonSpawnDelay);
+            Spawn(1, ref commonNextSpawnTime, ref commonObjectsCount, commonSpawnDelay, col1);
         }
         for (int i = 0; i < uncommonObjectsThreshold; i++)
         {
-            Spawn(3, ref uncommonNextSpawnTime, ref uncommonObjectsCount, uncommonSpawnDelay);
+            Spawn(3, ref uncommonNextSpawnTime, ref uncommonObjectsCount, uncommonSpawnDelay, col3);
         }
         for (int i = 0; i < rareObjectsThreshold; i++)
         {
-            Spawn(5, ref rareSpawnDelay, ref rareObjectsCount, rareSpawnDelay);
+            Spawn(5, ref rareSpawnDelay, ref rareObjectsCount, rareSpawnDelay, col5);
         }
         for (int i = 0; i < legendaryObjectsThreshold; i++)
         {
-            Spawn(10, ref legendaryNextSpawnTime, ref legendaryObjectsCount, legendarySpawnDelay);
+            Spawn(10, ref legendaryNextSpawnTime, ref legendaryObjectsCount, legendarySpawnDelay, col10);
         }
     }
 
@@ -61,23 +68,23 @@ public class collectableSpawnController : MonoBehaviour
         //consequently check all types of objects 
         if (shouldSpawn(commonObjectsCount, commonObjectsThreshold, commonSpawnDelay, ref commonNextSpawnTime))
         {
-            Spawn(1, ref commonNextSpawnTime, ref commonObjectsCount, commonSpawnDelay);
+            Spawn(1, ref commonNextSpawnTime, ref commonObjectsCount, commonSpawnDelay, col1);
         }
         if (shouldSpawn(uncommonObjectsCount, uncommonObjectsThreshold, uncommonSpawnDelay, ref uncommonNextSpawnTime))
         {
-            Spawn(3, ref uncommonNextSpawnTime, ref uncommonObjectsCount, uncommonSpawnDelay);
+            Spawn(3, ref uncommonNextSpawnTime, ref uncommonObjectsCount, uncommonSpawnDelay, col3);
         }
         if (shouldSpawn(rareObjectsCount, rareObjectsThreshold, rareSpawnDelay, ref rareNextSpawnTime))
         {
-            Spawn(5, ref rareSpawnDelay, ref rareObjectsCount, rareSpawnDelay);
+            Spawn(5, ref rareSpawnDelay, ref rareObjectsCount, rareSpawnDelay, col5);
         }
         if (shouldSpawn(legendaryObjectsCount, legendaryObjectsThreshold, legendarySpawnDelay, ref legendaryNextSpawnTime))
         {
-            Spawn(10, ref legendaryNextSpawnTime, ref legendaryObjectsCount, legendarySpawnDelay);
+            Spawn(10, ref legendaryNextSpawnTime, ref legendaryObjectsCount, legendarySpawnDelay, col10);
         }
     }
 
-    private void Spawn(int value, ref float spawnTime, ref int count, float spawnDelay)
+    private void Spawn(int value, ref float spawnTime, ref int count, float spawnDelay, GameObject par)
     {
         //generatePosition();
         spawnTime = Time.time + spawnDelay;//
@@ -86,6 +93,8 @@ public class collectableSpawnController : MonoBehaviour
         obj.gameObject.tag = "collectable" + value.ToString();
         var scr = obj.GetComponent<collectableController>();
         scr.value = value;
+        //put object into parent
+        obj.transform.parent = par.transform;
         //increase counter
         count++;
     }

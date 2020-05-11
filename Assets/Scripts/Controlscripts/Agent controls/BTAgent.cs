@@ -20,9 +20,22 @@ public class BTAgent : MonoBehaviour
         _tree = new RepeatForever
         {
             //construct the whole behavior tree
+            //urge to eat something
+            new Selector
+            {
+                new Consume { Consumable = food },
+                new Sequence
+                {
+                    //search for object
+                    //add to inventory
+                    new Consume { Consumable = food }
+                },
+            },
+
             new Sequence
             {
                 new GetRandomPoint { Radius = 139, Output = moveTarget },
+                new RotateTo { Target = moveTarget },
                 new MoveTo { Target = moveTarget },
                 new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
                 new Wait { Time = waitTime}

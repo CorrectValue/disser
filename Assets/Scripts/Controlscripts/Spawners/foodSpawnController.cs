@@ -13,12 +13,16 @@ public class foodSpawnController : MonoBehaviour
     public GameObject prefab1;
     public GameObject prefab2;
 
+    private GameObject parent; //parent object for food to clean up the scene
+
     private Vector3 pos;  //position to spawn to
     private Quaternion rot;  //rotation to spawn
 
     // Start is called before the first frame update
     void Start()
     {
+        //get food parent obj
+        parent = GameObject.Find("Food");
         //fill the arena before anyone can grab items
         for(int i = 0; i < foodCountThreshold; i++)
         {
@@ -48,6 +52,8 @@ public class foodSpawnController : MonoBehaviour
             obj = Instantiate(prefab2, generatePosition(), rot);
         //set tag
         obj.gameObject.tag = "food";
+        //put into parent object
+        obj.transform.parent = parent.transform;
         //increase counter
         totalFoodCount++;
     }

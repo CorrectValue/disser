@@ -400,7 +400,7 @@ GameObject:
   - component: {fileID: 8312083396684028650}
   m_Layer: 5
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: agentText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -421,8 +421,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -362, y: -236.3}
-  m_SizeDelta: {x: 61.44, y: 20}
+  m_AnchoredPosition: {x: -362, y: -220.3}
+  m_SizeDelta: {x: 61.44, y: 68.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6761688331420069768
 CanvasRenderer:
@@ -465,7 +465,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Agent
+  m_Text: 'Agent
+
+    HP:
+
+    Sat:
+
+    Hyd:
+
+    Points:'
 --- !u!1 &6624054480577550067
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,19 +8,27 @@ public class agentSpawnController : MonoBehaviour
     private int populationCount = 8;
     public int selected1, selected2;
     public GameObject contestant1, contestant2; //by now, we have two different prefabs, but idk if it's necessary
+    private GameObject population1, population2; //two different populations
     private Quaternion rot; //rotation to spawn
     // Start is called before the first frame update
     void Start()
     {
+        //get population objects
+        population1 = GameObject.Find("Contestant1");
+        population2 = GameObject.Find("Contestant2");
         //spawn all the agents of selected population  
-        for(int i = 0; i < populationCount; i++)
+        for (int i = 0; i < populationCount; i++)
         {
             //spawn agent of the 1st population
             var obj = Instantiate(contestant1, generatePosition(), rot);
             obj.GetComponent<agentType>().type = selected1;
+            //place agents of the 1st population into a parent object
+            obj.transform.parent = population1.transform;
             //spawn agent of the 2nd population
             var obj2 = Instantiate(contestant2, generatePosition(), rot);
             obj2.GetComponent<agentType>().type = selected2;
+            //place agents of the 2nd population into a parent object
+            obj2.transform.parent = population2.transform;
         }
 
     }
