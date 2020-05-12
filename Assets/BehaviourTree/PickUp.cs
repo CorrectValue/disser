@@ -12,10 +12,8 @@ namespace BehaviourTrees
         protected override NodeState OnRunning(ExecutionContext context)
         {
             var sc = (SimpleContext)context;
-            
-            return distance < 0.01f
-                ? NodeState.Success
-                : NodeState.Running;
+            //empty for now
+            return NodeState.Success;
         }
     }
 }

@@ -20,17 +20,63 @@ public class BTAgent : MonoBehaviour
         _tree = new RepeatForever
         {
             //construct the whole behavior tree
+            //here I need a switch to different paths basing on current agent condition
+            //1st path - low satiety
             //urge to eat something
             new Selector
             {
-                new Consume { Consumable = food },
+                new Consume { Consumable = 0 },
                 new Sequence
                 {
                     //search for object
                     //add to inventory
-                    new Consume { Consumable = food }
+                    new Consume { Consumable = 0 }
                 },
             },
+
+            //2nd path - low hydration
+            //urge to drink something
+            new Selector
+            {
+                new Consume { Consumable = 1 },
+                new Sequence
+                {
+                    //search for object
+                    //add to inventory
+                    new Consume { Consumable = 1 }
+                },
+            },
+
+            //3rd path - low HP
+            //urge to heal
+            new Selector
+            {
+                //get out of danger zone
+                new Invert
+                {
+                    new Sequence
+                    {
+                        //generate a point out of danger zone
+                        new GetRandomPoint { Radius = 139, Output = moveTarget }, //fix the coordinate
+                        //move to
+                        new MoveTo { Target = moveTarget }
+                    }
+                },
+
+                new Selector
+                {
+                     new Consume { Consumable = 2 },
+                     new Sequence
+                     {
+                        //search for object
+                        //add to inventory
+                        new Consume { Consumable = 2 }
+                     },
+                },
+            },
+            
+            //4th path - no conditions
+            //can proceed to search for objects
 
             new Sequence
             {

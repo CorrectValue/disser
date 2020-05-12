@@ -1,7 +1,7 @@
 ﻿using System;
 using BehaviourTrees;
 
-namespace AI
+namespace BehaviourTrees
 {
     public class Parallel : Composite
     {

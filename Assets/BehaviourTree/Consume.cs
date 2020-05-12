@@ -15,18 +15,22 @@ namespace BehaviourTrees
             switch(Consumable)
             {
                 case 0:
+                    //food
+                    //consume stored food
                     break;
                 case 1:
+                    //water
+                    //consume stored water
                     break;
                 case 2:
+                    //medkit
+                    //consume stored medkit
                     break;
                 default:
                     break;
             }
 
-            return distance < 0.01f
-                ? NodeState.Success
-                : NodeState.Running;
+            return NodeState.Success;
         }
     }
 }

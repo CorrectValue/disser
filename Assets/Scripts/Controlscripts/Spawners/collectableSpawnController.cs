@@ -104,11 +104,36 @@ public class collectableSpawnController : MonoBehaviour
         //generates position to spawn to
         float newx, newy, newz;
         //generate x, y and z accordingly to the value set by previous methods
-        //TEMPORARILY
 
-        newx = Random.Range(0, 10);
+        switch(value)
+        {
+            case 1:
+                //common objects can be found basically everywhere
+                newx = Random.Range(-139, 139);
+                newz = Random.Range(-139, 139);
+                break;
+            case 3:
+                //uncommon objects can be found rarer but still almost in any part of arena
+                newx = Random.Range(-100, 100);
+                newz = Random.Range(-100, 100);
+                break;
+            case 5:
+                //rare objects lie closer and closer to the center
+                newx = Random.Range(-50, 50);
+                newz = Random.Range(-50, 50);
+                break;
+            case 10:
+                //legendary object must lie closest to the center
+                newx = Random.Range(-5, 5);
+                newz = Random.Range(-5, 5);
+                break;
+            default:
+                newx = 0;
+                newz = 0;
+                break;
+        }
+
         newy = 2;
-        newz = Random.Range(0, 10);
 
         return new Vector3(newx, newy, newz);
     }
