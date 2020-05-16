@@ -155,25 +155,28 @@ public class agentStateController : MonoBehaviour
         gameObject.transform.Translate(0.0f, -1.0f, 0.0f);
     }
 
-    public void eat(float value)
+    public void eat()
     {
         //an agent has found something to eat
+        float value = 40.0f;
         satiety += value;
         if (satiety > maxSatiety)
             satiety = maxSatiety;
     }
 
-    public void drink(float value)
+    public void drink()
     {
         //an agent has found something to drink
+        float value = 40.0f;
         hydration += value;
         if (hydration > maxHydration)
             hydration = maxHydration;
     }
 
-    public void heal(float value)
+    public void heal()
     {
         //an agent has found a medkit
+        float value = 70.0f;
         health += value;
         if (health > maxHealth)
             health = maxHealth;

@@ -25,12 +25,12 @@ public class BTAgent : MonoBehaviour
             //urge to eat something
             new Selector
             {
-                new Consume { Consumable = 0 },
+                new Consume { Consumable = 0, actor = gameObject },
                 new Sequence
                 {
                     //search for object
                     //add to inventory
-                    new Consume { Consumable = 0 }
+                    new Consume { Consumable = 0, actor = gameObject }
                 },
             },
 
@@ -38,12 +38,12 @@ public class BTAgent : MonoBehaviour
             //urge to drink something
             new Selector
             {
-                new Consume { Consumable = 1 },
+                new Consume { Consumable = 1, actor = gameObject },
                 new Sequence
                 {
                     //search for object
                     //add to inventory
-                    new Consume { Consumable = 1 }
+                    new Consume { Consumable = 1, actor = gameObject }
                 },
             },
 
@@ -65,18 +65,19 @@ public class BTAgent : MonoBehaviour
 
                 new Selector
                 {
-                     new Consume { Consumable = 2 },
+                     new Consume { Consumable = 2, actor = gameObject },
                      new Sequence
                      {
                         //search for object
                         //add to inventory
-                        new Consume { Consumable = 2 }
+                        new Consume { Consumable = 2, actor = gameObject }
                      },
                 },
             },
             
             //4th path - no conditions
             //can proceed to search for objects
+            //switch strategy based on the type of an actor
 
             new Sequence
             {
