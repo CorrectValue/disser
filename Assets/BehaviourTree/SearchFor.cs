@@ -10,8 +10,9 @@ public sealed class SearchFor : BaseBehaviourTreeNode
     private SimpleContext _context;
 
     public InVariable<int> searchTarget { get; set; } //enumerated search target: food, water, medkit or collectable (1-3-5-10)
+    public InVariable<GameObject> Actor { get; set; } //enumerated search target: food, water, medkit or collectable (1-3-5-10)
 
-    /*protected override NodeState OnRunning(ExecutionContext context)
+    protected override NodeState OnRunning(ExecutionContext context)
     {
         var sc = (SimpleContext)context;
         var moveTarget = new Variable<Vector3>();
@@ -24,8 +25,9 @@ public sealed class SearchFor : BaseBehaviourTreeNode
             {
                 //check object presence in the field of view
                 //get object coordinates
-                new MoveTo { Target = objCoords }
+                new MoveTo { Target = objCoords },
                 //grab an object and store it
+                new PickUp { Object = obj, actor = Actor }
             },
 
             //an object is nowhere to be found close
@@ -46,10 +48,11 @@ public sealed class SearchFor : BaseBehaviourTreeNode
                 },
 
                 //get object coordinates
-                new MoveTo { Target = objCoords }
+                new MoveTo { Target = objCoords },
                 //grab an object and store it
+                new PickUp { Object = obj, actor = Actor }
             }
         };
 
-    }*/
+    }
 }

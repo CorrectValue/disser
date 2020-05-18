@@ -162,6 +162,8 @@ public class agentStateController : MonoBehaviour
         satiety += value;
         if (satiety > maxSatiety)
             satiety = maxSatiety;
+        var scr = gameObject.GetComponent<itemManager>();
+        scr.foodStored = false;
     }
 
     public void drink()
@@ -171,6 +173,9 @@ public class agentStateController : MonoBehaviour
         hydration += value;
         if (hydration > maxHydration)
             hydration = maxHydration;
+        //set stored beverage false
+        var scr = gameObject.GetComponent<itemManager>();
+        scr.waterStored = false;
     }
 
     public void heal()
@@ -180,6 +185,8 @@ public class agentStateController : MonoBehaviour
         health += value;
         if (health > maxHealth)
             health = maxHealth;
+        var scr = gameObject.GetComponent<itemManager>();
+        scr.medkitStored = false;
     }
 
     public void earnPoint(int value)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class itemManager : MonoBehaviour
 {
     //this script serves to maintain items collected by an agent
-    bool medkitStored, foodStored, waterStored;
+    public bool medkitStored, foodStored, waterStored;
     
     // Start is called before the first frame update
     void Start()
@@ -15,13 +15,7 @@ public class itemManager : MonoBehaviour
         waterStored = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void pickUp(GameObject item)
+    public void pickUp(GameObject item)
     {
         //pick up an object and store or use it
         //first, need to determine type of an object we're about to consume
