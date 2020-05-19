@@ -23,40 +23,41 @@ public class BTAgent : MonoBehaviour
         {
             //construct the whole behavior tree
             //here I need a switch to different paths basing on current agent condition
-            new ConditionalSelector
+            new Selector
             {
-                condition = scr.isDying(),
-                //1st path - low HP
-                //urge to heal
-                new Selector
+                new CheckDying
                 {
-                    //get out of danger zone
-                    new Invert
-                    {
-                        new Sequence
-                        {
-                            //generate a point out of danger zone
-                            new GetRandomPoint { Radius = 139, Output = moveTarget }, //fix the coordinate
-                            //move to
-                            new MoveTo { Target = moveTarget }
-                        }
-                    },
-
+                    //1st path - low HP
+                    //urge to heal
                     new Selector
                     {
+                        //get out of danger zone
+                        new Invert
+                        {
+                            new Sequence
+                            {
+                                //generate a point out of danger zone
+                                new GetRandomPoint { Radius = 139, Output = moveTarget }, //fix the coordinate
+                                //move to
+                                new MoveTo { Target = moveTarget }
+                            }
+                        },
+
+                        new Selector
+                        {
                             new Consume { Consumable = 2, actor = gameObject },
                             new Sequence
                             {
-                            //search for object
-                            //add to inventory
-                            new Consume { Consumable = 2, actor = gameObject }
-                            },
-                    },
+                                //search for object
+                                //add to inventory
+                                new Consume { Consumable = 2, actor = gameObject }
+                            }
+                        }
+                    }
                 },
-                
-                new ConditionalSelector
+
+                new CheckThirsty
                 {
-                    condition = scr.isThirsty(),
                     //2nd path - low hydration
                     //urge to drink something
                     new Selector
@@ -67,27 +68,40 @@ public class BTAgent : MonoBehaviour
                             //search for object
                             new SearchFor { searchTarget = 1, Actor = gameObject },
                             new Consume { Consumable = 1, actor = gameObject }
-                        },
-                    },
-                    new ConditionalSelector
-                    {
-                        condition = scr.isHungry(), 
-                        //3rd path - low satiety
-                        //urge to eat something
-                        new Selector
-                        {
-                            new Consume { Consumable = 0, actor = gameObject },
-                            new Sequence
-                            {
-                                //search for object
-                                new SearchFor { searchTarget = 0, Actor = gameObject },
-                                new Consume { Consumable = 0, actor = gameObject }
-                            },
-                        },
-                        //4th path - no conditions
-                        //can proceed to search for objects
-                        //switch strategy based on the type of an actor
+                        }
+                    }
+                },
 
+                new CheckHungry
+                {
+                    //3rd path - low satiety
+                    //urge to eat something
+                    new Selector
+                    {
+                        new Consume { Consumable = 0, actor = gameObject },
+                        new Sequence
+                        {
+                            //search for object
+                            new SearchFor { searchTarget = 0, Actor = gameObject },
+                            new Consume { Consumable = 0, actor = gameObject }
+                        }
+                    }
+                },
+
+                new CheckOk
+                {
+                    //4th path - no conditions
+                    //can proceed to search for objects
+                    //switch strategy based on the type of an actor
+                    new CheckType
+                    {
+                        //0 - clever population
+
+                        //1 - cautious population
+
+                        //2 - balanced population
+
+                        //3 - risky population
                         new Sequence
                         {
                             new GetRandomPoint { Radius = 139, Output = moveTarget },
@@ -97,8 +111,9 @@ public class BTAgent : MonoBehaviour
                             new Wait { Time = waitTime}
                         }
                     }
+                    
                 }
-            },
+            }
         };
     }
 

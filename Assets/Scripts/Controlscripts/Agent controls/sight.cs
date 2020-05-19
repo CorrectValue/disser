@@ -20,4 +20,9 @@ public class sight : MonoBehaviour {
         anim = GetComponent<Animator>();
        // lastSighting
     }
+
+    void OnTriggerStay(Collider other)
+    {
+        if(other.tag == ...)
+    }
 }

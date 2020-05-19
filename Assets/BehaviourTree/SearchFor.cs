@@ -24,6 +24,7 @@ public sealed class SearchFor : BaseBehaviourTreeNode
             new Sequence
             {
                 //check object presence in the field of view
+
                 //get object coordinates
                 new MoveTo { Target = objCoords },
                 //grab an object and store it
