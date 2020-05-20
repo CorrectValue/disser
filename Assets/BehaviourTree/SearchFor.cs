@@ -17,6 +17,7 @@ public sealed class SearchFor : BaseBehaviourTreeNode
         var sc = (SimpleContext)context;
         var moveTarget = new Variable<Vector3>();
         var objCoords = new Variable<Vector3>();
+        GameObject obj = new GameObject();
 
         _tree = new Selector
         {
@@ -29,6 +30,7 @@ public sealed class SearchFor : BaseBehaviourTreeNode
                 new MoveTo { Target = objCoords },
                 //grab an object and store it
                 new PickUp { Object = obj, actor = Actor }
+                
             },
 
             //an object is nowhere to be found close
@@ -54,6 +56,6 @@ public sealed class SearchFor : BaseBehaviourTreeNode
                 new PickUp { Object = obj, actor = Actor }
             }
         };
-
+        return NodeState.Success;
     }
 }

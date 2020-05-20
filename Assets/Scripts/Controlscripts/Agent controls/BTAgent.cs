@@ -22,96 +22,121 @@ public class BTAgent : MonoBehaviour
         _tree = new RepeatForever
         {
             //construct the whole behavior tree
-            //here I need a switch to different paths basing on current agent condition
-            new Selector
+            //check if an agent is alive in the first place
+            new CheckAlive
             {
-                new CheckDying
+                //here I need a switch to different paths basing on current agent condition
+                new Selector
                 {
-                    //1st path - low HP
-                    //urge to heal
-                    new Selector
+                    new CheckDying
                     {
-                        //get out of danger zone
-                        new Invert
-                        {
-                            new Sequence
-                            {
-                                //generate a point out of danger zone
-                                new GetRandomPoint { Radius = 139, Output = moveTarget }, //fix the coordinate
-                                //move to
-                                new MoveTo { Target = moveTarget }
-                            }
-                        },
-
+                        //1st path - low HP
+                        //urge to heal
                         new Selector
                         {
-                            new Consume { Consumable = 2, actor = gameObject },
+                            //get out of danger zone
+                            new Invert
+                            {
+                                new Sequence
+                                {
+                                    //generate a point out of danger zone
+                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, //fix the coordinate
+                                    //move to
+                                    new MoveTo { Target = moveTarget }
+                                }
+                            },
+
+                            new Selector
+                            {
+                                new Consume { Consumable = 2, actor = gameObject },
+                                new Sequence
+                                {
+                                    //search for object
+                                    //add to inventory
+                                    new Consume { Consumable = 2, actor = gameObject }
+                                }
+                            }
+                        }
+                    },
+
+                    new CheckThirsty
+                    {
+                        //2nd path - low hydration
+                        //urge to drink something
+                        new Selector
+                        {
+                            new Consume { Consumable = 1, actor = gameObject },
                             new Sequence
                             {
                                 //search for object
-                                //add to inventory
-                                new Consume { Consumable = 2, actor = gameObject }
+                                new SearchFor { searchTarget = 1, Actor = gameObject },
+                                new Consume { Consumable = 1, actor = gameObject }
                             }
                         }
-                    }
-                },
+                    },
 
-                new CheckThirsty
-                {
-                    //2nd path - low hydration
-                    //urge to drink something
-                    new Selector
+                    new CheckHungry
                     {
-                        new Consume { Consumable = 1, actor = gameObject },
-                        new Sequence
+                        //3rd path - low satiety
+                        //urge to eat something
+                        new Selector
                         {
-                            //search for object
-                            new SearchFor { searchTarget = 1, Actor = gameObject },
-                            new Consume { Consumable = 1, actor = gameObject }
+                            new Consume { Consumable = 0, actor = gameObject },
+                            new Sequence
+                            {
+                                //search for object
+                                new SearchFor { searchTarget = 0, Actor = gameObject },
+                                new Consume { Consumable = 0, actor = gameObject }
+                            }
                         }
-                    }
-                },
+                    },
 
-                new CheckHungry
-                {
-                    //3rd path - low satiety
-                    //urge to eat something
-                    new Selector
+                    new CheckOk
                     {
-                        new Consume { Consumable = 0, actor = gameObject },
-                        new Sequence
+                        //4th path - no conditions
+                        //can proceed to search for objects
+                        //switch strategy based on the type of an actor
+                        new CheckType
                         {
-                            //search for object
-                            new SearchFor { searchTarget = 0, Actor = gameObject },
-                            new Consume { Consumable = 0, actor = gameObject }
+                            //0 - clever population
+                            new Sequence
+                            {
+                                new GetRandomPoint { Radius = 139, Output = moveTarget },
+                                new RotateTo { Target = moveTarget },
+                                new MoveTo { Target = moveTarget },
+                                new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
+                                new Wait { Time = waitTime}
+                            },
+                            //1 - cautious population
+                            new Sequence
+                            {
+                                new GetRandomPoint { Radius = 139, Output = moveTarget },
+                                new RotateTo { Target = moveTarget },
+                                new MoveTo { Target = moveTarget },
+                                new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
+                                new Wait { Time = waitTime}
+                            },
+                            //2 - balanced population
+                            new Sequence
+                            {
+                                new GetRandomPoint { Radius = 139, Output = moveTarget },
+                                new RotateTo { Target = moveTarget },
+                                new MoveTo { Target = moveTarget },
+                                new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
+                                new Wait { Time = waitTime}
+                            },
+                            //3 - risky population
+                            new Sequence
+                            {
+                                new GetRandomPoint { Radius = 139, Output = moveTarget },
+                                new RotateTo { Target = moveTarget },
+                                new MoveTo { Target = moveTarget },
+                                new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
+                                new Wait { Time = waitTime}
+                            }
                         }
+
                     }
-                },
-
-                new CheckOk
-                {
-                    //4th path - no conditions
-                    //can proceed to search for objects
-                    //switch strategy based on the type of an actor
-                    new CheckType
-                    {
-                        //0 - clever population
-
-                        //1 - cautious population
-
-                        //2 - balanced population
-
-                        //3 - risky population
-                        new Sequence
-                        {
-                            new GetRandomPoint { Radius = 139, Output = moveTarget },
-                            new RotateTo { Target = moveTarget },
-                            new MoveTo { Target = moveTarget },
-                            new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
-                            new Wait { Time = waitTime}
-                        }
-                    }
-                    
                 }
             }
         };

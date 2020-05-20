@@ -210,4 +210,8 @@ public class agentStateController : MonoBehaviour
         //returns true if an agent has very low HP
         return dying;
     }
+    public bool isDead()
+    {
+        return dead;
+    }
 }
