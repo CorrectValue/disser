@@ -17,6 +17,7 @@ public sealed class SearchFor : BaseBehaviourTreeNode
         var sc = (SimpleContext)context;
         var moveTarget = new Variable<Vector3>();
         var objCoords = new Variable<Vector3>();
+        
         GameObject obj = new GameObject();
 
         _tree = new Selector
@@ -41,10 +42,11 @@ public sealed class SearchFor : BaseBehaviourTreeNode
                     new Sequence
                     {
                         new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                        new Parallel
+                        new Parallel //remove
                         {
-                            new MoveTo { Target = moveTarget }
+                            new MoveTo { Target = moveTarget },
                             //look for an object on the fov
+                            new LookFor { targetObject = searchTarget,  Output = objCoords}
                             //once an object is found, return success
                         }
                     }

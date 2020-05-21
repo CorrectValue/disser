@@ -108,6 +108,7 @@ public class BTAgent : MonoBehaviour
                                 new Wait { Time = waitTime}
                             },
                             //1 - cautious population
+                            //need to stay out of the center
                             new Sequence
                             {
                                 new GetRandomPoint { Radius = 139, Output = moveTarget },
@@ -117,6 +118,7 @@ public class BTAgent : MonoBehaviour
                                 new Wait { Time = waitTime}
                             },
                             //2 - balanced population
+                            //true random 
                             new Sequence
                             {
                                 new GetRandomPoint { Radius = 139, Output = moveTarget },
@@ -126,11 +128,14 @@ public class BTAgent : MonoBehaviour
                                 new Wait { Time = waitTime}
                             },
                             //3 - risky population
+                            //tries to stay as close to the center as possible
                             new Sequence
                             {
-                                new GetRandomPoint { Radius = 139, Output = moveTarget },
+                                //move to the center
+                                new GetRandomPoint { Radius = 50, Output = moveTarget },
                                 new RotateTo { Target = moveTarget },
                                 new MoveTo { Target = moveTarget },
+                                //search for goodies
                                 new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
                                 new Wait { Time = waitTime}
                             }

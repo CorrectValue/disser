@@ -1,35 +1,44 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 
-public class sight : MonoBehaviour {
-
-    //public float viewRadius;
-    //public float viewAngle;
+public class fieldOfView : MonoBehaviour
+{
+    public bool SHITFOUND;
     public List<GameObject> objects; //list of all the objects present in the fov
-
-
-    void OnTriggerStay(Collider other)
+    // Start is called before the first frame update
+    void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "food" || other.gameObject.tag == "water" || other.gameObject.tag == "collectable1" || other.gameObject.tag == "collectable3" || 
+        if (other.gameObject.tag == "food" || other.gameObject.tag == "water" || other.gameObject.tag == "collectable1" || other.gameObject.tag == "collectable3" ||
             other.gameObject.tag == "collectable5" || other.gameObject.tag == "collectable10")
         {
             //add object to list
-            objects.Add(other.gameObject);
+        objects.Add(other.gameObject);
+            Debug.Log("Found something!!!!");
+            SHITFOUND = true;
         }
     }
 
-    Vector3 checkObjectPresenceInFOV(int obj)
+    void OnTriggerExit(Collider other)
+    {
+        //remove an object from the list
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+    public Vector3 checkObjectPresenceInFOV(int obj)
     {
         //checks if a desired object is in agent's fov
-        switch(obj)
+        switch (obj)
         {
             case 0:
                 //food
-                foreach(GameObject Object in objects)
+                foreach (GameObject Object in objects)
                 {
-                    if(Object.tag == "food")
+                    if (Object.tag == "food")
                     {
                         return Object.transform.position;
                     }
