@@ -16,7 +16,7 @@ namespace BehaviourTrees
 
             //invoke other script's pickup method
             actor.Get().GetComponent<itemManager>().pickUp(Object.Get());
-
+            Debug.Log("Picked up!");
             return NodeState.Success;
         }
     }

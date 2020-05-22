@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class fieldOfView : MonoBehaviour
 {
-    public bool SHITFOUND;
     public List<GameObject> objects; //list of all the objects present in the fov
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)
@@ -13,15 +12,14 @@ public class fieldOfView : MonoBehaviour
             other.gameObject.tag == "collectable5" || other.gameObject.tag == "collectable10")
         {
             //add object to list
-        objects.Add(other.gameObject);
-            Debug.Log("Found something!!!!");
-            SHITFOUND = true;
+            objects.Add(other.gameObject);
         }
     }
 
     void OnTriggerExit(Collider other)
     {
         //remove an object from the list
+
     }
 
     // Update is called once per frame
@@ -29,7 +27,7 @@ public class fieldOfView : MonoBehaviour
     {
         
     }
-    public Vector3 checkObjectPresenceInFOV(int obj)
+    public GameObject checkObjectPresenceInFOV(int obj)
     {
         //checks if a desired object is in agent's fov
         switch (obj)
@@ -40,7 +38,7 @@ public class fieldOfView : MonoBehaviour
                 {
                     if (Object.tag == "food")
                     {
-                        return Object.transform.position;
+                        return Object;
                     }
                 }
                 break;
@@ -50,7 +48,7 @@ public class fieldOfView : MonoBehaviour
                 {
                     if (Object.tag == "water")
                     {
-                        return Object.transform.position;
+                        return Object;
                     }
                 }
                 break;
@@ -60,7 +58,7 @@ public class fieldOfView : MonoBehaviour
                 {
                     if (Object.tag == "medkit")
                     {
-                        return Object.transform.position;
+                        return Object;
                     }
                 }
                 break;
@@ -71,11 +69,11 @@ public class fieldOfView : MonoBehaviour
                     if (Object.tag == "collectable1" || Object.tag == "collectable3" ||
             Object.tag == "collectable5" || Object.tag == "collectable10")
                     {
-                        return Object.transform.position;
+                        return Object;
                     }
                 }
                 break;
         }
-        return new Vector3(0, -100, 0); //in case nothing is found, return inconsistent coordinate
+        return null; //in case nothing is found, return inconsistent coordinate
     }
 }

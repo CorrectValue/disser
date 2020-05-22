@@ -121,11 +121,7 @@ public class BTAgent : MonoBehaviour
                             //true random 
                             new Sequence
                             {
-                                new GetRandomPoint { Radius = 139, Output = moveTarget },
-                                new RotateTo { Target = moveTarget },
-                                new MoveTo { Target = moveTarget },
-                                new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
-                                new Wait { Time = waitTime}
+                                new SearchFor { searchTarget = 3, Actor = gameObject },
                             },
                             //3 - risky population
                             //tries to stay as close to the center as possible
@@ -150,6 +146,9 @@ public class BTAgent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         _tree.Execute(_context);
+
+        
     }
 }
