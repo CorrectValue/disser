@@ -18,7 +18,6 @@ public class BTAgent : MonoBehaviour
         var waitTime = new Variable<float>();
         var scr = gameObject.GetComponent<agentStateController>();
         var scr2 = gameObject.GetComponent<agentType>();
-
         _tree = new RepeatForever
         {
             //construct the whole behavior tree
@@ -32,6 +31,7 @@ public class BTAgent : MonoBehaviour
                     {
                         //1st path - low HP
                         //urge to heal
+                        new DebugLog { Str = "I'm on low HP" },
                         new Selector
                         {
                             //get out of danger zone
@@ -63,6 +63,7 @@ public class BTAgent : MonoBehaviour
                     {
                         //2nd path - low hydration
                         //urge to drink something
+                        new DebugLog { Str = "I'm thirsty" },
                         new Selector
                         {
                             new Consume { Consumable = 1, actor = gameObject },
@@ -79,6 +80,7 @@ public class BTAgent : MonoBehaviour
                     {
                         //3rd path - low satiety
                         //urge to eat something
+                        new DebugLog { Str = "I'm hungry" },
                         new Selector
                         {
                             new Consume { Consumable = 0, actor = gameObject },
@@ -121,6 +123,7 @@ public class BTAgent : MonoBehaviour
                             //true random 
                             new Sequence
                             {
+                                new DebugLog { Str = "Searching for goods" },
                                 new SearchFor { searchTarget = 3, Actor = gameObject },
                             },
                             //3 - risky population
@@ -146,9 +149,7 @@ public class BTAgent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         _tree.Execute(_context);
-
-        
+    
     }
 }

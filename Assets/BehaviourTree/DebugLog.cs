@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace BehaviourTrees
 {
-    //pick up an object and store it
+    //needed for debugging
+    
     public sealed class DebugLog : BaseBehaviourTreeNode
     {
-        
+        public InVariable<string> Str { get; set; }
         protected override NodeState OnRunning(ExecutionContext context)
         {
-            Debug.Log("I'm here!");
+            Debug.Log(Str.Get());
             return NodeState.Success;
         }
     }

@@ -30,6 +30,7 @@ public class fieldOfView : MonoBehaviour
     public GameObject checkObjectPresenceInFOV(int obj)
     {
         //checks if a desired object is in agent's fov
+       // Debug.Log("Searching for" + obj.ToString());
         switch (obj)
         {
             case 0:
@@ -64,6 +65,7 @@ public class fieldOfView : MonoBehaviour
                 break;
             case 3:
                 //any collectable
+                Debug.Log("Maybe i'm there");
                 foreach (GameObject Object in objects)
                 {
                     if (Object.tag == "collectable1" || Object.tag == "collectable3" ||
