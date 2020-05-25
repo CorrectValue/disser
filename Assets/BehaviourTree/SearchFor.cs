@@ -10,8 +10,6 @@ public sealed class SearchFor : BaseBehaviourTreeNode
     private SimpleContext _context;
 
     public InVariable<int> searchTarget { get; set; } //enumerated search target: food, water, medkit or collectable (1-3-5-10)
-    public InVariable<GameObject> Actor { get; set; } //
-
     
     Variable<Vector3> moveTarget = new Variable<Vector3>();
     Variable<Vector3> objCoords = new Variable<Vector3>();
@@ -19,7 +17,7 @@ public sealed class SearchFor : BaseBehaviourTreeNode
 
     public SearchFor()
     {
-        int target = searchTarget.Get();
+        var target = Bindings.Create(() => searchTarget.Get());
         _tree = new Selector
         {
             
@@ -27,20 +25,20 @@ public sealed class SearchFor : BaseBehaviourTreeNode
             new Sequence
             {
                 //check object presence in the field of view
-                new DebugLog { Str = "Looking for " + target },
-                new LookFor { targetObject = target, Output = objCoords, OutputObj = obj},
+                new LookFor { targetObject = target.Get(), Output = objCoords, OutputObj = obj},
                 //get object coordinates
-                
+                new DebugLog { Str = "Target is " + target.Get().ToString() }, //здесь 0
                 new RotateTo { Target = objCoords },
                 new MoveTo { Target = objCoords },
                 //grab an object and store it
-                new PickUp { Object = obj, actor = Actor }
+                new PickUp { Object = obj }
 
             },
 
             //an object is nowhere to be found close
             new Sequence
             {
+                new DebugLog { Str = "Target is " + target.Get().ToString() },
                 new RepeatUntilSuccess
                 {
                     new Sequence
@@ -50,7 +48,7 @@ public sealed class SearchFor : BaseBehaviourTreeNode
                         new RotateTo { Target = moveTarget },
                         new MoveTo { Target = moveTarget },
                         //look for an object on the fov
-                        new LookFor { targetObject = searchTarget.Get(), Output = objCoords, OutputObj = obj}
+                        new LookFor { targetObject = target.Get(), Output = objCoords, OutputObj = obj}
                         //once an object is found, return success
                         
                     }
@@ -60,13 +58,14 @@ public sealed class SearchFor : BaseBehaviourTreeNode
                 new RotateTo { Target = objCoords },
                 new MoveTo { Target = objCoords },
                 //grab an object and store it
-                new PickUp { Object = obj, actor = Actor }
+                new PickUp { Object = obj }
             }
         };
     }
     protected override NodeState OnRunning(ExecutionContext context)
     {
-        Debug.Log("Search for " + searchTarget.Get().ToString());
+        
+        Debug.Log("Search for " + searchTarget.Get().ToString()); //здесь 3
         _tree.Execute(context);
 
         //SimpleContext sc = (SimpleContext)context;

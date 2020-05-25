@@ -17,20 +17,20 @@ namespace BehaviourTrees
             var scr = actor.GetComponent<fieldOfView>();
             Vector3 coords = new Vector3();
             GameObject obj;
-
-            Debug.Log("Look for " + targetObject.Get().ToString());
+            var target = Bindings.Create(() => targetObject.Get());
+            Debug.Log("Looking for " + target.Get().ToString());
 
             //check if an actor has the targetobject in fov
-            obj = scr.checkObjectPresenceInFOV(targetObject.Get());
+            obj = scr.checkObjectPresenceInFOV(target.Get());
 
             if (obj == null)
             {
-                Debug.Log("LookFor: no object found, looking for " + targetObject.Get().ToString());
+                Debug.Log("LookFor: no object found, looking for " + target.Get().ToString());
                 return NodeState.Failure;
             }
             else
             {
-                Debug.Log("LookFor: object found, looking for " + targetObject.Get().ToString());
+                Debug.Log("LookFor: object found, looking for " + target.Get().ToString());
                 coords = obj.transform.position;
                 Output.Set(coords);
                 OutputObj.Set(obj);

@@ -48,12 +48,12 @@ public class BTAgent : MonoBehaviour
 
                             new Selector
                             {
-                                new Consume { Consumable = 2, actor = gameObject },
+                                new Consume { Consumable = 2 },
                                 new Sequence
                                 {
                                     //search for object
                                     //add to inventory
-                                    new Consume { Consumable = 2, actor = gameObject }
+                                    new Consume { Consumable = 2 }
                                 }
                             }
                         }
@@ -66,12 +66,12 @@ public class BTAgent : MonoBehaviour
                         new DebugLog { Str = "I'm thirsty" },
                         new Selector
                         {
-                            new Consume { Consumable = 1, actor = gameObject },
+                            new Consume { Consumable = 1 },
                             new Sequence
                             {
                                 //search for object
-                                new SearchFor { searchTarget = 1, Actor = gameObject },
-                                new Consume { Consumable = 1, actor = gameObject }
+                                new SearchFor { searchTarget = 1 },
+                                new Consume { Consumable = 1 }
                             }
                         }
                     },
@@ -83,12 +83,12 @@ public class BTAgent : MonoBehaviour
                         new DebugLog { Str = "I'm hungry" },
                         new Selector
                         {
-                            new Consume { Consumable = 0, actor = gameObject },
+                            new Consume { Consumable = 0 },
                             new Sequence
                             {
                                 //search for object
-                                new SearchFor { searchTarget = 0, Actor = gameObject },
-                                new Consume { Consumable = 0, actor = gameObject }
+                                new SearchFor { searchTarget = 0 },
+                                new Consume { Consumable = 0 }
                             }
                         }
                     },
@@ -124,7 +124,7 @@ public class BTAgent : MonoBehaviour
                             new Sequence
                             {
                                 new DebugLog { Str = "Searching for goods" },
-                                new SearchFor { searchTarget = 3, Actor = gameObject },
+                                new SearchFor { searchTarget = 3 },
                             },
                             //3 - risky population
                             //tries to stay as close to the center as possible
