@@ -58,6 +58,7 @@ public class itemManager : MonoBehaviour
             waterStored = true;
         }
         //and then in any case we destroy the object we've picked up
+        Debug.Log("Trying to destroy");
         Destroy(item);
     }
 }

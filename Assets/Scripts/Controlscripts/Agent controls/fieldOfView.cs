@@ -65,9 +65,10 @@ public class fieldOfView : MonoBehaviour
                 break;
             case 3:
                 //any collectable
-                Debug.Log("Maybe i'm there");
-                foreach (GameObject Object in objects)
+                Debug.Log("Objects: " + objects.Count);
+                foreach (GameObject Object in objects) //does not go in here
                 {
+                    Debug.Log("I'm walking here!");
                     if (Object.tag == "collectable1" || Object.tag == "collectable3" ||
             Object.tag == "collectable5" || Object.tag == "collectable10")
                     {

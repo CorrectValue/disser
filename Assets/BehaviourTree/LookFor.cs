@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BehaviourTrees;
 
 namespace BehaviourTrees
 {
@@ -14,7 +15,7 @@ namespace BehaviourTrees
         {
             var sc = (SimpleContext)context;
             var actor = sc.Actor;
-            var scr = actor.GetComponent<fieldOfView>();
+            var scr = actor.transform.GetChild(0).GetComponent<fieldOfView>();
             Vector3 coords = new Vector3();
             GameObject obj;
             var target = Bindings.Create(() => targetObject.Get());

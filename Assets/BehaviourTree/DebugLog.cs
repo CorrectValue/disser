@@ -11,7 +11,8 @@ namespace BehaviourTrees
         public InVariable<string> Str { get; set; }
         protected override NodeState OnRunning(ExecutionContext context)
         {
-            Debug.Log(Str.Get());
+            var str = Bindings.Create(() => Str.Get());
+            Debug.Log(str.Get());
             return NodeState.Success;
         }
     }

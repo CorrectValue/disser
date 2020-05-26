@@ -14,6 +14,8 @@ public class agentStateController : MonoBehaviour
     public float hydration;//means how hydrated an agent is: zero means thirsty => decreasing HP
     public int points; //sum of points collected by agent
 
+    public int searchTarget; //this is a KOSTYL
+
     //maximum values 
     private float maxHealth; 
     private float maxSatiety;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BehaviourTrees;
 
-public class BTAgent : MonoBehaviour
+public class BTAgent1 : MonoBehaviour
 {
 
     private IBehaviourTreeNode _tree;
@@ -18,6 +18,10 @@ public class BTAgent : MonoBehaviour
         var waitTime = new Variable<float>();
         var scr = gameObject.GetComponent<agentStateController>();
         var scr2 = gameObject.GetComponent<agentType>();
+        int target;
+        Variable<Vector3> objCoords = new Variable<Vector3>();
+        Variable<GameObject> obj = new Variable<GameObject>();
+
         _tree = new RepeatForever
         {
             //construct the whole behavior tree
@@ -128,7 +132,49 @@ public class BTAgent : MonoBehaviour
                             {
                                 new DebugLog { Str = "Searching for goods" },
                                 new SetSearchTarget { Target = 3 },
-                                new SearchFor {  },
+                                new Selector
+                                {
+            
+                                    //an object is present in the field of view of an agent
+                                    new Sequence
+                                    {
+                                        //check object presence in the field of view
+                                        new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj},
+                                        //get object coordinates
+                                        //new DebugLog { Str = "Target is " + target.ToString() }, //здесь 0
+                                        new RotateTo { Target = objCoords },
+                                        new MoveTo { Target = objCoords },
+                                        //grab an object and store it
+                                        new PickUp { Object = obj }
+
+                                    },
+
+                                    //an object is nowhere to be found close
+                                    new Sequence
+                                    {
+                                        //new DebugLog { Str = "Target is " + target.ToString() },
+                                        new RepeatUntilSuccess
+                                        {
+                                            new Sequence
+                                            {
+                                                new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
+                                                //parallel!
+                                                new RotateTo { Target = moveTarget },
+                                                new MoveTo { Target = moveTarget },
+                                                //look for an object on the fov
+                                                new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj}
+                                                //once an object is found, return success
+                        
+                                            }
+                                        },
+
+                                        //get object coordinates
+                                        new RotateTo { Target = objCoords },
+                                        new MoveTo { Target = objCoords },
+                                        //grab an object and store it
+                                        new PickUp { Object = obj }
+                                    }
+                                }
                             },
                             //3 - risky population
                             //tries to stay as close to the center as possible

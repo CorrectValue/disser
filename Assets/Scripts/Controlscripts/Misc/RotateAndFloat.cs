@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RotateAndFloat : MonoBehaviour
 {
-    float amplitude = 0.0125f;
+    float amplitude = 0.005f;
     float speed = 0.75f;
     // Update is called once per frame
     void Update()
