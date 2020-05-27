@@ -30,6 +30,8 @@ public class collectableSpawnController : MonoBehaviour
     private Vector3 pos;  //position to spawn to
     private Quaternion rot;  //rotation to spawn
 
+    private static int id; //id to give a new object
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,7 +94,10 @@ public class collectableSpawnController : MonoBehaviour
         //set tag
         obj.gameObject.tag = "collectable" + value.ToString();
         var scr = obj.GetComponent<collectableController>();
+        var scr2 = obj.GetComponent<itemController>();
         scr.value = value;
+        scr2.id = id;
+        id++;
         //put object into parent
         obj.transform.parent = par.transform;
         //increase counter

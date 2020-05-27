@@ -18,6 +18,8 @@ public class foodSpawnController : MonoBehaviour
     private Vector3 pos;  //position to spawn to
     private Quaternion rot;  //rotation to spawn
 
+    private static int id; //global id
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +54,10 @@ public class foodSpawnController : MonoBehaviour
             obj = Instantiate(prefab2, generatePosition(), rot);
         //set tag
         obj.gameObject.tag = "food";
+        //set id
+        var scr2 = obj.GetComponent<itemController>();
+        scr2.id = id;
+        id++;
         //put into parent object
         obj.transform.parent = parent.transform;
         //increase counter

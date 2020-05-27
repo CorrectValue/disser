@@ -59,6 +59,8 @@ public class itemManager : MonoBehaviour
         }
         //and then in any case we destroy the object we've picked up
         Debug.Log("Trying to destroy");
-        Destroy(item);
+        item.SetActive(false);
+        Destroy(item); //a problem.
+        Debug.Log("Item destroyed");
     }
 }

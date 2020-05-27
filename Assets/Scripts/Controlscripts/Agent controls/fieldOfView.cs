@@ -19,7 +19,17 @@ public class fieldOfView : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         //remove an object from the list
-
+        //first find this object in the list
+        int index; //index of an object to destroy
+        for(int i = 0; i < objects.Count; i++)
+        {
+            if(objects[i].gameObject.tag == other.gameObject.tag && 
+                objects[i].GetComponent<itemController>().id == other.gameObject.GetComponent<itemController>().id)
+            {
+                Debug.Log("Removing from the list");
+                objects.RemoveAt(i);
+            }
+        }
     }
 
     // Update is called once per frame
@@ -66,7 +76,7 @@ public class fieldOfView : MonoBehaviour
             case 3:
                 //any collectable
                 Debug.Log("Objects: " + objects.Count);
-                foreach (GameObject Object in objects) //does not go in here
+                foreach (GameObject Object in objects) 
                 {
                     Debug.Log("I'm walking here!");
                     if (Object.tag == "collectable1" || Object.tag == "collectable3" ||

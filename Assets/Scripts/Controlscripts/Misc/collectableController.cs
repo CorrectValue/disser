@@ -16,10 +16,4 @@ public class collectableController : MonoBehaviour
         size = baseSize * Mathf.Sqrt(value);
         transform.localScale *= size;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

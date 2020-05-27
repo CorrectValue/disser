@@ -11,6 +11,8 @@ public class medkitSpawnController : MonoBehaviour
 
     private GameObject parent; //parent obj
 
+    private static int id; //global id
+
     public GameObject prefab1;
     private Vector3 pos;  //position to spawn to
     private Quaternion rot;  //rotation to spawn
@@ -44,6 +46,10 @@ public class medkitSpawnController : MonoBehaviour
         obj = Instantiate(prefab1, generatePosition(), rot);
         //set tag
         obj.gameObject.tag = "medkit";
+        //set id
+        var scr2 = obj.GetComponent<itemController>();
+        scr2.id = id;
+        id++;
         //put into parent
         obj.transform.parent = parent.transform;
         //increase counter

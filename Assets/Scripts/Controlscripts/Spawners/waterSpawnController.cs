@@ -11,6 +11,8 @@ public class waterSpawnController : MonoBehaviour
 
     private GameObject parent; //parent obj
 
+    private static int id; //global id
+
     public GameObject prefab;
 
     private Vector3 pos;  //position to spawn to
@@ -43,6 +45,10 @@ public class waterSpawnController : MonoBehaviour
         obj = Instantiate(prefab, generatePosition(), rot);
         //set tag
         obj.gameObject.tag = "water";
+        //set id
+        var scr2 = obj.GetComponent<itemController>();
+        scr2.id = id;
+        id++;
         //put into parent
         obj.transform.parent = parent.transform;
         //increase counter
