@@ -11,7 +11,7 @@ namespace BehaviourTrees
         protected override NodeState OnStart(ExecutionContext context)
         {
             var p = Random.insideUnitCircle * Radius;
-            Output.Set(Center + new Vector3(p.x, 0, p.y));
+            Output.Set(Center + new Vector3(p.x, 2.0f, p.y));
 
             return NodeState.Success;
         }

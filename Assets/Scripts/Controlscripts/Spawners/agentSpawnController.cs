@@ -6,8 +6,9 @@ public class agentSpawnController : MonoBehaviour
 {
     //this script serves to execute initial spawn of both population of agents
     private int populationCount = 8;
+    private int globalId = 0;
     public int selected1, selected2;
-    public GameObject contestant1, contestant2; //by now, we have two different prefabs, but idk if it's necessary
+    public GameObject agent; //agent prefab
     private GameObject population1, population2; //two different populations
     private Quaternion rot; //rotation to spawn
     // Start is called before the first frame update
@@ -20,13 +21,21 @@ public class agentSpawnController : MonoBehaviour
         for (int i = 0; i < populationCount; i++)
         {
             //spawn agent of the 1st population
-            var obj = Instantiate(contestant1, generatePosition(), rot);
+            var obj = Instantiate(agent, generatePosition(), rot);
             obj.GetComponent<agentType>().type = selected1;
+            //set id
+            obj.GetComponent<agentController>().id = globalId;
+            //set tag
+            obj.gameObject.tag = "contestant1";
             //place agents of the 1st population into a parent object
             obj.transform.parent = population1.transform;
             //spawn agent of the 2nd population
-            var obj2 = Instantiate(contestant2, generatePosition(), rot);
+            var obj2 = Instantiate(agent, generatePosition(), rot);
             obj2.GetComponent<agentType>().type = selected2;
+            //set id
+            obj2.GetComponent<agentController>().id = globalId;
+            //set tag
+            obj2.gameObject.tag = "contestant2";
             //place agents of the 2nd population into a parent object
             obj2.transform.parent = population2.transform;
         }

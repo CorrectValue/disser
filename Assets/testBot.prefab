@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 152878550481282741}
   - component: {fileID: 8986700597323238353}
   - component: {fileID: 4218743500752608579}
+  - component: {fileID: 957975487324065351}
   m_Layer: 8
   m_Name: testBot
   m_TagString: Untagged
@@ -114,7 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c0a1fd8cd1f4944b9b8e1f9f1520a25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
   health: 0
   satiety: 0
   hydration: 0
@@ -172,6 +172,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe9f9bcdbe393284cba9bc11a7c14b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &957975487324065351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 152878550481282731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1ce06f17d08fa44fb687cfc2d07cf5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0
 --- !u!1 &152878550745870877
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,8 +214,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 152878550745870877}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.65}
-  m_LocalScale: {x: 3.0198987, y: 2.6337688, z: 4.139248}
+  m_LocalPosition: {x: 0, y: 3.64, z: 5.46}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 152878550481282739}
   m_RootOrder: 0
@@ -233,7 +246,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fe680277fae9b3a4d82acce8e31f32cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

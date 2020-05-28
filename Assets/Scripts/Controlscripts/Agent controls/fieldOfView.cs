@@ -23,10 +23,9 @@ public class fieldOfView : MonoBehaviour
         int index; //index of an object to destroy
         for(int i = 0; i < objects.Count; i++)
         {
-            if(objects[i].gameObject.tag == other.gameObject.tag && 
-                objects[i].GetComponent<itemController>().id == other.gameObject.GetComponent<itemController>().id)
+            if(objects[i] == null || (objects[i].gameObject.tag == other.gameObject.tag && 
+                objects[i].GetComponent<itemController>().id == other.gameObject.GetComponent<itemController>().id))
             {
-                Debug.Log("Removing from the list");
                 objects.RemoveAt(i);
             }
         }
@@ -75,14 +74,15 @@ public class fieldOfView : MonoBehaviour
                 break;
             case 3:
                 //any collectable
-                Debug.Log("Objects: " + objects.Count);
                 foreach (GameObject Object in objects) 
                 {
-                    Debug.Log("I'm walking here!");
-                    if (Object.tag == "collectable1" || Object.tag == "collectable3" ||
-            Object.tag == "collectable5" || Object.tag == "collectable10")
+                    if (Object != null)
                     {
-                        return Object;
+                        if (Object.tag == "collectable1" || Object.tag == "collectable3" ||
+                Object.tag == "collectable5" || Object.tag == "collectable10")
+                        {
+                            return Object;
+                        }
                     }
                 }
                 break;

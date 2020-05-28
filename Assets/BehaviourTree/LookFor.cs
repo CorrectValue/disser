@@ -33,6 +33,7 @@ namespace BehaviourTrees
             {
                 Debug.Log("LookFor: object found, looking for " + target.Get().ToString());
                 coords = obj.transform.position;
+                coords.y = 2.0f;
                 Output.Set(coords);
                 OutputObj.Set(obj);
                 return NodeState.Success;

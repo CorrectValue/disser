@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class agentStateController : MonoBehaviour
 {
-    //need to have global ID for agents
-    public static int globalId;
-    public int id;
     //this script is needed to maintain control of all of the agent's stats
     //such as health, satiety and hydration
     public float health;   //health points of an agent: zero means death

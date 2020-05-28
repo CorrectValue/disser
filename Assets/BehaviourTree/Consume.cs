@@ -18,17 +18,26 @@ namespace BehaviourTrees
                 case 0:
                     //food
                     //consume stored food
-                    actor.GetComponent<agentStateController>().eat();
+                    if (actor.GetComponent<itemManager>().foodStored)
+                        actor.GetComponent<agentStateController>().eat();
+                    else
+                        return NodeState.Failure;
                     break;
                 case 1:
                     //water
                     //consume stored water
-                    actor.GetComponent<agentStateController>().drink();
+                    if (actor.GetComponent<itemManager>().waterStored)
+                        actor.GetComponent<agentStateController>().drink();
+                    else
+                        return NodeState.Failure;
                     break;
                 case 2:
                     //medkit
                     //consume stored medkit
-                    actor.GetComponent<agentStateController>().heal();
+                    if (actor.GetComponent<itemManager>().medkitStored)
+                        actor.GetComponent<agentStateController>().heal();
+                    else
+                        return NodeState.Failure;
                     break;
                 default:
                     break;

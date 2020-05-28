@@ -14,6 +14,8 @@ TagManager:
   - collectable10
   - food
   - agentText
+  - contestant1
+  - contestant2
   layers:
   - Default
   - TransparentFX
