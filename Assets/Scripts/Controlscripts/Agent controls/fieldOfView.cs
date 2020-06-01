@@ -46,7 +46,7 @@ public class fieldOfView : MonoBehaviour
                 //food
                 foreach (GameObject Object in objects)
                 {
-                    if (Object.tag == "food")
+                    if (Object != null && Object.tag == "food")
                     {
                         return Object;
                     }
@@ -56,7 +56,7 @@ public class fieldOfView : MonoBehaviour
                 //water
                 foreach (GameObject Object in objects)
                 {
-                    if (Object.tag == "water")
+                    if (Object != null && Object.tag == "water")
                     {
                         return Object;
                     }
@@ -66,7 +66,7 @@ public class fieldOfView : MonoBehaviour
                 //medkit
                 foreach (GameObject Object in objects)
                 {
-                    if (Object.tag == "medkit")
+                    if (Object != null && Object.tag == "medkit")
                     {
                         return Object;
                     }

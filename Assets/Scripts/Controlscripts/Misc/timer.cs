@@ -41,7 +41,16 @@ public class timer : MonoBehaviour
     {
         //the simulation stops and the next scene must be loaded
         //thus, we need to store all the data to use it later
-
+        GameObject storage = GameObject.Find("storage");
+        GameObject contestant1 = GameObject.Find("Contestant1");
+        GameObject contestant2 = GameObject.Find("Contestant2");
+        var scr = storage.GetComponent<dataStorage2>();
+        for(int i = 0; i < 8; i++)
+        {
+            //load agents into storage lists
+            scr.contestant1.Add(contestant1.transform.GetChild(i).gameObject);
+            scr.contestant2.Add(contestant2.transform.GetChild(i).gameObject);
+        }
         //and switch the scene
         switchScene();
     }

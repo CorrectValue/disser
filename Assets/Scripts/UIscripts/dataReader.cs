@@ -40,7 +40,8 @@ public class dataReader : MonoBehaviour
         spawner.GetComponent<collectableSpawnController>().legendarySpawnDelay /= (int)spawnRateValue;
         spawner.GetComponent<medkitSpawnController>().spawnDelay /= (int)spawnRateValue;
         //set simulation time
-        controller.GetComponent<timer>().simulationTime = simTimeValue * 60; //converting minutes to seconds
+       // controller.GetComponent<timer>().simulationTime = simTimeValue * 60; //converting minutes to seconds
+        controller.GetComponent<timer>().simulationTime = 10; //FOR DEBUG PURPOSES
         //set populations to spawn
         spawner.GetComponent<agentSpawnController>().selected1 = selected1;
         spawner.GetComponent<agentSpawnController>().selected2 = selected2;
