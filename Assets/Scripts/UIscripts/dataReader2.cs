@@ -16,6 +16,9 @@ public class dataReader2 : MonoBehaviour
 
     void OnEnable()
     {
+        //set cursor visible
+        Cursor.visible = true;
+
         storage = GameObject.Find("storage");
         parent = GameObject.Find("Cvs");
         int type1, type2;
