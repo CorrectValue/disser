@@ -39,7 +39,7 @@ public class fieldOfView : MonoBehaviour
     public GameObject checkObjectPresenceInFOV(int obj)
     {
         //checks if a desired object is in agent's fov
-       // Debug.Log("Searching for" + obj.ToString());
+        
         switch (obj)
         {
             case 0:
@@ -58,6 +58,7 @@ public class fieldOfView : MonoBehaviour
                 {
                     if (Object != null && Object.tag == "water")
                     {
+                        Debug.Log("I WANT WATERRRR");
                         return Object;
                     }
                 }

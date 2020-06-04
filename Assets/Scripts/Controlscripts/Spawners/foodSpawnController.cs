@@ -69,7 +69,6 @@ public class foodSpawnController : MonoBehaviour
         //generates position to spawn to
         float newx, newy, newz;
         //generate x, y and z accordingly to the value set by previous methods
-        //TEMPORARILY
         newx = Random.Range(-139, 139);
         newy = 2;
         newz = Random.Range(-139, 139);
@@ -79,8 +78,6 @@ public class foodSpawnController : MonoBehaviour
 
     private bool shouldSpawn()
     {
-        //returns true if a certain type of artifact should spawn
-        //common artifact
         //check if current number of objects is less than its threshold
         if (totalFoodCount < foodCountThreshold)
         {

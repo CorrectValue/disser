@@ -532,8 +532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -268, y: 114}
-  m_SizeDelta: {x: 517.09, y: 75}
+  m_AnchoredPosition: {x: -235, y: 114}
+  m_SizeDelta: {x: 213.32, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &992821300
 MonoBehaviour:
@@ -729,7 +729,7 @@ GameObject:
   - component: {fileID: 1505835043}
   - component: {fileID: 1505835042}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Cvs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -854,8 +854,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 157, y: 114}
-  m_SizeDelta: {x: 517.09, y: 75}
+  m_AnchoredPosition: {x: 237, y: 114}
+  m_SizeDelta: {x: 256.37, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1692912685
 MonoBehaviour:
@@ -1102,6 +1102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399ce13d4152f5045be38c93cc47d0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  panel: {fileID: 1155358719420702611, guid: 49f82f41da1f76e45a1f7d3cf7aa8c52, type: 3}
 --- !u!4 &2093874873
 Transform:
   m_ObjectHideFlags: 0

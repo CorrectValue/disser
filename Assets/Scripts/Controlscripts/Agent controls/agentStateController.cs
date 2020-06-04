@@ -10,6 +10,7 @@ public class agentStateController : MonoBehaviour
     public float satiety;  //means how hungry an agent is: zero means hungry => slowly decreasing HP
     public float hydration;//means how hydrated an agent is: zero means thirsty => decreasing HP
     public int points; //sum of points collected by agent
+    public float timeAlive; //time that an agent has been alive
 
     public int searchTarget; //this is a KOSTYL
 
@@ -37,6 +38,7 @@ public class agentStateController : MonoBehaviour
         satiety = 70.0f;
         hydration = 70.0f;
         dead = false;
+        timeAlive = 0.0f;
         //initialize thresholds
         //we have a unified interface which means it's urgent to get the type of the population from a different script
         //here, clever agent acts like a balanced one and has somewhat balanced thresholds
@@ -142,6 +144,8 @@ public class agentStateController : MonoBehaviour
                 //very thirsty, start decreasing health
                 health = health - Time.deltaTime * 1.5f; //need to make a better formula
             }
+            //recalculate alive time
+            timeAlive += Time.deltaTime;
         }
     }
 

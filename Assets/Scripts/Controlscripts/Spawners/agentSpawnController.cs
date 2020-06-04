@@ -38,6 +38,9 @@ public class agentSpawnController : MonoBehaviour
             obj2.gameObject.tag = "contestant2";
             //place agents of the 2nd population into a parent object
             obj2.transform.parent = population2.transform;
+
+            //increase globalid
+            globalId++;
         }
 
     }

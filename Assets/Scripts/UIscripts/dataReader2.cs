@@ -10,19 +10,23 @@ public class dataReader2 : MonoBehaviour
     Text con1, con2;
     Text winner;
     int points1, points2;
+    public GameObject panel;
+    GameObject parent;
+    Quaternion rot;
 
     void OnEnable()
     {
         storage = GameObject.Find("storage");
+        parent = GameObject.Find("Cvs");
         int type1, type2;
         Debug.Log("EndScreen");
         type1 = storage.GetComponent<dataStorage2>().contestant1[0].GetComponent<agentType>().type;
         type2 = storage.GetComponent<dataStorage2>().contestant2[0].GetComponent<agentType>().type;
 
-        con1 = GameObject.Find("Canvas/Con1").GetComponent<UnityEngine.UI.Text>();
-        con2 = GameObject.Find("Canvas/Con2").GetComponent<UnityEngine.UI.Text>();
+        con1 = GameObject.Find("Cvs/Con1").GetComponent<UnityEngine.UI.Text>();
+        con2 = GameObject.Find("Cvs/Con2").GetComponent<UnityEngine.UI.Text>();
 
-        winner = GameObject.Find("Canvas/Winner").GetComponent<UnityEngine.UI.Text>();
+        winner = GameObject.Find("Cvs/Winner").GetComponent<UnityEngine.UI.Text>();
 
         switch (type1)
         {
@@ -59,7 +63,22 @@ public class dataReader2 : MonoBehaviour
         //select winner
         winner.text = getWinner();
         //fill the table with all the agents
-
+        var scr = storage.GetComponent<dataStorage2>();
+        for (int i = 0; i < 8; i++)
+        {
+            //instantiate panels
+            Debug.Log("canvas is");
+            var obj = Instantiate(panel, new Vector3(158, 340 - 35 * i, 0), rot,  parent.transform);
+            obj.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "Agent #" + scr.contestant1[i].GetComponent<agentController>().id 
+                + " Time alive: " + scr.contestant1[i].GetComponent<agentStateController>().timeAlive +
+                "\n" + "Points: " + scr.contestant1[i].GetComponent<agentStateController>().points +
+                " Health: " + scr.contestant1[i].GetComponent<agentStateController>().health;
+            var obj2 = Instantiate(panel, new Vector3(620, 340 - 35 * i, 0), rot, parent.transform);
+            obj2.transform.GetChild(0).GetComponent<UnityEngine.UI.Text>().text = "Agent #" + scr.contestant2[i].GetComponent<agentController>().id
+               + " Time alive: " + scr.contestant2[i].GetComponent<agentStateController>().timeAlive +
+               "\n" + "Points: " + scr.contestant2[i].GetComponent<agentStateController>().points +
+               " Health: " + scr.contestant2[i].GetComponent<agentStateController>().health;
+        }
         //destroy agents
         destroyAgents();
     }

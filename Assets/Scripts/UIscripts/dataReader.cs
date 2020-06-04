@@ -22,6 +22,16 @@ public class dataReader : MonoBehaviour
         pointCountValue = storage.GetComponent<dataStorageScript>().pointCountValue;
         selected1 = storage.GetComponent<dataStorageScript>().selected1;
         selected2 = storage.GetComponent<dataStorageScript>().selected2;
+
+        //INCONSISTENT DATA INITIALIZER
+        //FOR TEST PURPOSES
+        //spawnRateValue = 10;
+        //simTimeValue = 10;
+        //foodValue = 1000;
+        //waterValue = 1000;
+        //pointCountValue = 10000;
+        
+
         //set values where they belong
         //set food and water spawn thresholds
         spawner.GetComponent<foodSpawnController>().foodCountThreshold = (int)foodValue;
@@ -40,8 +50,8 @@ public class dataReader : MonoBehaviour
         spawner.GetComponent<collectableSpawnController>().legendarySpawnDelay /= (int)spawnRateValue;
         spawner.GetComponent<medkitSpawnController>().spawnDelay /= (int)spawnRateValue;
         //set simulation time
-       // controller.GetComponent<timer>().simulationTime = simTimeValue * 60; //converting minutes to seconds
-        controller.GetComponent<timer>().simulationTime = 10; //FOR DEBUG PURPOSES
+        controller.GetComponent<timer>().simulationTime = simTimeValue * 60; //converting minutes to seconds
+        //controller.GetComponent<timer>().simulationTime = 1;
         //set populations to spawn
         spawner.GetComponent<agentSpawnController>().selected1 = selected1;
         spawner.GetComponent<agentSpawnController>().selected2 = selected2;
