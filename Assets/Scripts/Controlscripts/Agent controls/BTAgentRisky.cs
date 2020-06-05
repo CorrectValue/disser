@@ -84,8 +84,7 @@ public class BTAgentRisky : MonoBehaviour
                                                 {
                                                     new Sequence
                                                     {
-                                                        new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                                                        //parallel!
+                                                        new GetRandomPoint { Radius = 139, Output = moveTarget }, 
                                                         new RotateTo { Target = moveTarget },
                                                         new MoveTo { Target = moveTarget },
                                                         //look for an object on the fov
@@ -94,7 +93,6 @@ public class BTAgentRisky : MonoBehaviour
                         
                                                     }
                                                 },
-
                                                 //get object coordinates
                                                 new RotateTo { Target = objCoords },
                                                 new MoveTo { Target = objCoords },
@@ -102,8 +100,6 @@ public class BTAgentRisky : MonoBehaviour
                                                 new PickUp { Object = obj }
                                             }
                                         },
-                                        //add to inventory
-
                                         new Consume { Consumable = 2 }
                                     }
                                 }
@@ -117,50 +113,40 @@ public class BTAgentRisky : MonoBehaviour
                         //urge to drink something
                         new Sequence
                         {
-                            new DebugLog { Str = "I'm thirsty" },
                             new Selector
                             {
                                 new Consume { Consumable = 1 },
                                 new Sequence
                                 {
                                     //search for object
-                                    new DebugLog { Str = "Searching for water" },
                                     new Selector
                                     {
-            
                                         //an object is present in the field of view of an agent
                                         new Sequence
                                         {
                                             //check object presence in the field of view
                                             new LookFor { targetObject = 1, Output = objCoords, OutputObj = obj},
                                             //get object coordinates
-                                            //new DebugLog { Str = "Target is " + target.ToString() }, //здесь 0
                                             new RotateTo { Target = objCoords },
                                             new MoveTo { Target = objCoords },
                                             //grab an object and store it
                                             new PickUp { Object = obj }
-
                                         },
 
                                         //an object is nowhere to be found close
                                         new Sequence
                                         {
-                                            //new DebugLog { Str = "Target is " + target.ToString() },
                                             new RepeatUntilSuccess
                                             {
                                                 new Sequence
                                                 {
-                                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                                                    //parallel!
+                                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, 
                                                     new RotateTo { Target = moveTarget },
                                                     new MoveTo { Target = moveTarget },
                                                     //look for an object on the fov
                                                     new LookFor { targetObject = 1, Output = objCoords, OutputObj = obj}
-                                                    //once an object is found, return success
-                        
                                                 }
                                             },
-
                                             //get object coordinates
                                             new RotateTo { Target = objCoords },
                                             new MoveTo { Target = objCoords },
@@ -180,17 +166,14 @@ public class BTAgentRisky : MonoBehaviour
                         //urge to eat something
                         new Sequence
                         {
-                            new DebugLog { Str = "I'm hungry" },
                             new Selector
                             {
                                 new Consume { Consumable = 0 },
                                 new Sequence
                                 {
                                     //search for object
-                                    new DebugLog { Str = "Searching for food" },
                                     new Selector
                                     {
-            
                                         //an object is present in the field of view of an agent
                                         new Sequence
                                         {
@@ -201,28 +184,21 @@ public class BTAgentRisky : MonoBehaviour
                                             new MoveTo { Target = objCoords },
                                             //grab an object and store it
                                             new PickUp { Object = obj }
-
                                         },
-
                                         //an object is nowhere to be found close
                                         new Sequence
                                         {
-                                            //new DebugLog { Str = "Target is " + target.ToString() },
                                             new RepeatUntilSuccess
                                             {
                                                 new Sequence
                                                 {
-                                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                                                    //parallel!
+                                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, 
                                                     new RotateTo { Target = moveTarget },
                                                     new MoveTo { Target = moveTarget },
                                                     //look for an object on the fov
                                                     new LookFor { targetObject = 0, Output = objCoords, OutputObj = obj}
-                                                    //once an object is found, return success
-                        
                                                 }
                                             },
-
                                             //get object coordinates
                                             new RotateTo { Target = objCoords },
                                             new MoveTo { Target = objCoords },
@@ -240,70 +216,44 @@ public class BTAgentRisky : MonoBehaviour
                     {
                         //4th path - no conditions
                         //can proceed to search for objects
-                        //switch strategy based on the type of an actor
-
-                            new Sequence
+                        new Sequence
+                        {
+                            new Selector
                             {
-                                new DebugLog { Str = "Searching for goods" },
-                                new Selector
+                                //an object is present in the field of view of an agent
+                                new Sequence
                                 {
-            
-                                    //an object is present in the field of view of an agent
-                                    new Sequence
+                                    //check object presence in the field of view
+                                    new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj},
+                                    //get object coordinates
+                                    new RotateTo { Target = objCoords },
+                                    new MoveTo { Target = objCoords },
+                                    //grab an object and store it
+                                    new PickUp { Object = obj }
+                                },
+                                //an object is nowhere to be found close
+                                new Sequence
+                                {
+                                    new RepeatUntilSuccess
                                     {
-                                        //check object presence in the field of view
-                                        new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj},
-                                        //get object coordinates
-                                        //new DebugLog { Str = "Target is " + target.ToString() }, //здесь 0
-                                        new RotateTo { Target = objCoords },
-                                        new MoveTo { Target = objCoords },
-                                        //grab an object and store it
-                                        new PickUp { Object = obj }
-
-                                    },
-
-                                    //an object is nowhere to be found close
-                                    new Sequence
-                                    {
-                                        //new DebugLog { Str = "Target is " + target.ToString() },
-                                        new RepeatUntilSuccess
+                                        new Sequence
                                         {
-                                            new Sequence
-                                            {
-                                                new GetRandomPoint { Radius = 50, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                                                //parallel!
-                                                new RotateTo { Target = moveTarget },
-                                                new MoveTo { Target = moveTarget },
-                                                //look for an object on the fov
-                                                new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj}
-                                                //once an object is found, return success
-                        
-                                            }
-                                        },
-
-                                        //get object coordinates
-                                        new RotateTo { Target = objCoords },
-                                        new MoveTo { Target = objCoords },
-                                        //grab an object and store it
-                                        new PickUp { Object = obj }
-                                    }
+                                            new GetRandomPoint { Radius = 50, Output = moveTarget }, 
+                                            new RotateTo { Target = moveTarget },
+                                            new MoveTo { Target = moveTarget },
+                                            //look for an object on the fov
+                                            new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj}
+                                        }
+                                    },
+                                    //get object coordinates
+                                    new RotateTo { Target = objCoords },
+                                    new MoveTo { Target = objCoords },
+                                    //grab an object and store it
+                                    new PickUp { Object = obj }
                                 }
-                            },
-                            //3 - risky population
-                            //tries to stay as close to the center as possible
-                            new Sequence
-                            {
-                                //move to the center
-                                new GetRandomPoint { Radius = 50, Output = moveTarget },
-                                new RotateTo { Target = moveTarget },
-                                new MoveTo { Target = moveTarget },
-                                //search for goodies
-                                new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
-                                new Wait { Time = waitTime}
                             }
-                        }
-
-                    
+                        },
+                    }
                 }
             }
         };
@@ -313,6 +263,5 @@ public class BTAgentRisky : MonoBehaviour
     void Update()
     {
         _tree.Execute(_context);
-    
     }
 }

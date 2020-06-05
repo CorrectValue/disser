@@ -28,8 +28,6 @@ public class BTAgentCautious : MonoBehaviour
             //check if an agent is alive in the first place
             new CheckAlive
             {
-                
-                //new DebugLog { Str = "I'm alive?" },
                 //here I need a switch to different paths basing on current agent condition
                 new Selector
                 {
@@ -53,29 +51,24 @@ public class BTAgentCautious : MonoBehaviour
                                         new MoveTo { Target = moveTarget }
                                     }
                                 },
-
                                 new Selector
                                 {
                                     new Consume { Consumable = 2 },
                                     new Sequence
                                     {
                                         //search for object
-                                        new DebugLog { Str = "Searching for medkit" },
                                         new Selector
                                         {
-            
                                             //an object is present in the field of view of an agent
                                             new Sequence
                                             {
                                                 //check object presence in the field of view
                                                 new LookFor { targetObject = 2, Output = objCoords, OutputObj = obj},
                                                 //get object coordinates
-                                                //new DebugLog { Str = "Target is " + target.ToString() }, //здесь 0
                                                 new RotateTo { Target = objCoords },
                                                 new MoveTo { Target = objCoords },
                                                 //grab an object and store it
                                                 new PickUp { Object = obj }
-
                                             },
 
                                             //an object is nowhere to be found close
@@ -85,17 +78,13 @@ public class BTAgentCautious : MonoBehaviour
                                                 {
                                                     new Sequence
                                                     {
-                                                        new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                                                        //parallel!
+                                                        new GetRandomPoint { Radius = 139, Output = moveTarget }, 
                                                         new RotateTo { Target = moveTarget },
                                                         new MoveTo { Target = moveTarget },
                                                         //look for an object on the fov
                                                         new LookFor { targetObject = 2, Output = objCoords, OutputObj = obj}
-                                                        //once an object is found, return success
-                        
                                                     }
                                                 },
-
                                                 //get object coordinates
                                                 new RotateTo { Target = objCoords },
                                                 new MoveTo { Target = objCoords },
@@ -103,29 +92,24 @@ public class BTAgentCautious : MonoBehaviour
                                                 new PickUp { Object = obj }
                                             }
                                         },
-                                        //add to inventory
-
                                         new Consume { Consumable = 2 }
                                     }
                                 }
                             }
                         }
                     },
-
                     new CheckThirsty
                     {
                         //2nd path - low hydration
                         //urge to drink something
                         new Sequence
                         {
-                            new DebugLog { Str = "I'm thirsty" },
                             new Selector
                             {
                                 new Consume { Consumable = 1 },
                                 new Sequence
                                 {
                                     //search for object
-                                    new DebugLog { Str = "Searching for water" },
                                     new Selector
                                     {
             
@@ -135,33 +119,25 @@ public class BTAgentCautious : MonoBehaviour
                                             //check object presence in the field of view
                                             new LookFor { targetObject = 1, Output = objCoords, OutputObj = obj},
                                             //get object coordinates
-                                            //new DebugLog { Str = "Target is " + target.ToString() }, //здесь 0
                                             new RotateTo { Target = objCoords },
                                             new MoveTo { Target = objCoords },
                                             //grab an object and store it
                                             new PickUp { Object = obj }
-
                                         },
-
                                         //an object is nowhere to be found close
                                         new Sequence
                                         {
-                                            //new DebugLog { Str = "Target is " + target.ToString() },
                                             new RepeatUntilSuccess
                                             {
                                                 new Sequence
                                                 {
-                                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                                                    //parallel!
+                                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, 
                                                     new RotateTo { Target = moveTarget },
                                                     new MoveTo { Target = moveTarget },
                                                     //look for an object on the fov
                                                     new LookFor { targetObject = 1, Output = objCoords, OutputObj = obj}
-                                                    //once an object is found, return success
-                        
                                                 }
                                             },
-
                                             //get object coordinates
                                             new RotateTo { Target = objCoords },
                                             new MoveTo { Target = objCoords },
@@ -174,24 +150,20 @@ public class BTAgentCautious : MonoBehaviour
                             }
                         }
                     },
-
                     new CheckHungry
                     {
                         //3rd path - low satiety
                         //urge to eat something
                         new Sequence
                         {
-                            new DebugLog { Str = "I'm hungry" },
                             new Selector
                             {
                                 new Consume { Consumable = 0 },
                                 new Sequence
                                 {
                                     //search for object
-                                    new DebugLog { Str = "Searching for food" },
                                     new Selector
                                     {
-            
                                         //an object is present in the field of view of an agent
                                         new Sequence
                                         {
@@ -202,28 +174,21 @@ public class BTAgentCautious : MonoBehaviour
                                             new MoveTo { Target = objCoords },
                                             //grab an object and store it
                                             new PickUp { Object = obj }
-
                                         },
-
                                         //an object is nowhere to be found close
                                         new Sequence
                                         {
-                                            //new DebugLog { Str = "Target is " + target.ToString() },
                                             new RepeatUntilSuccess
                                             {
                                                 new Sequence
                                                 {
-                                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                                                    //parallel!
+                                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, 
                                                     new RotateTo { Target = moveTarget },
                                                     new MoveTo { Target = moveTarget },
                                                     //look for an object on the fov
                                                     new LookFor { targetObject = 0, Output = objCoords, OutputObj = obj}
-                                                    //once an object is found, return success
-                        
                                                 }
                                             },
-
                                             //get object coordinates
                                             new RotateTo { Target = objCoords },
                                             new MoveTo { Target = objCoords },
@@ -236,13 +201,10 @@ public class BTAgentCautious : MonoBehaviour
                             }
                         }
                     },
-
                     new CheckOk
                     {
                         //4th path - no conditions
                         //can proceed to search for objects
-                        //1 - cautious population
-                        //need to stay out of the center
                         new Sequence
                         {
                             new GetRandomPoint { Radius = 139, Output = moveTarget },
@@ -251,12 +213,9 @@ public class BTAgentCautious : MonoBehaviour
                             new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
                             new Wait { Time = waitTime}
                         },
-                        
                     }
-
                 }
             }
-            
         };
     }
 
