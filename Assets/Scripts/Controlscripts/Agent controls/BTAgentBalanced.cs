@@ -97,7 +97,6 @@ public class BTAgentBalanced : MonoBehaviour
                             }
                         }
                     },
-
                     new CheckThirsty
                     {
                         //2nd path - low hydration
@@ -183,8 +182,7 @@ public class BTAgentBalanced : MonoBehaviour
                                             {
                                                 new Sequence
                                                 {
-                                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                                                    //parallel!
+                                                    new GetRandomPoint { Radius = 139, Output = moveTarget },
                                                     new RotateTo { Target = moveTarget },
                                                     new MoveTo { Target = moveTarget },
                                                     //look for an object on the fov
