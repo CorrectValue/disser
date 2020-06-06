@@ -38,7 +38,6 @@ public class BTAgentRisky : MonoBehaviour
                         //urge to heal
                         new Sequence
                         {
-                            new DebugLog { Str = "I'm on low HP" },
                             new Selector
                             {
                                 //get out of danger zone
@@ -59,7 +58,6 @@ public class BTAgentRisky : MonoBehaviour
                                     new Sequence
                                     {
                                         //search for object
-                                        new DebugLog { Str = "Searching for medkit" },
                                         new Selector
                                         {
             
@@ -74,9 +72,7 @@ public class BTAgentRisky : MonoBehaviour
                                                 new MoveTo { Target = objCoords },
                                                 //grab an object and store it
                                                 new PickUp { Object = obj }
-
                                             },
-
                                             //an object is nowhere to be found close
                                             new Sequence
                                             {
@@ -89,8 +85,6 @@ public class BTAgentRisky : MonoBehaviour
                                                         new MoveTo { Target = moveTarget },
                                                         //look for an object on the fov
                                                         new LookFor { targetObject = 2, Output = objCoords, OutputObj = obj}
-                                                        //once an object is found, return success
-                        
                                                     }
                                                 },
                                                 //get object coordinates
@@ -106,7 +100,6 @@ public class BTAgentRisky : MonoBehaviour
                             }
                         }
                     },
-
                     new CheckThirsty
                     {
                         //2nd path - low hydration
@@ -132,7 +125,6 @@ public class BTAgentRisky : MonoBehaviour
                                             //grab an object and store it
                                             new PickUp { Object = obj }
                                         },
-
                                         //an object is nowhere to be found close
                                         new Sequence
                                         {
@@ -159,7 +151,6 @@ public class BTAgentRisky : MonoBehaviour
                             }
                         }
                     },
-
                     new CheckHungry
                     {
                         //3rd path - low satiety
@@ -211,13 +202,56 @@ public class BTAgentRisky : MonoBehaviour
                             }
                         }
                     },
-
-                    new CheckOk
+                    //4th path - no conditions
+                    //can proceed to search for objects
+                    new Selector
                     {
-                        //4th path - no conditions
-                        //can proceed to search for objects
+                        new Invert
+                        {
+                            //search for object
+                            new Selector
+                            {
+                                //an object is present in the field of view of an agent
+                                new Sequence
+                                {
+                                    //check object presence in the field of view
+                                    new LookFor { targetObject = 0, Output = objCoords, OutputObj = obj},
+                                    //get object coordinates
+                                    new RotateTo { Target = objCoords },
+                                    new MoveTo { Target = objCoords },
+                                    //grab an object and store it
+                                    new PickUp { Object = obj }
+                                },
+                                //an object is nowhere to be found close
+                                new Sequence
+                                {
+                                    new RepeatUntilSuccess
+                                    {
+                                        new Sequence
+                                        {
+                                            new GetRandomPoint { Radius = 139, Output = moveTarget },
+                                            new RotateTo { Target = moveTarget },
+                                            new MoveTo { Target = moveTarget },
+                                            //look for an object on the fov
+                                            new LookFor { targetObject = 2, Output = objCoords, OutputObj = obj}
+                                        }
+                                    },
+                                    //get object coordinates
+                                    new RotateTo { Target = objCoords },
+                                    new MoveTo { Target = objCoords },
+                                    //grab an object and store it
+                                    new PickUp { Object = obj }
+                                }
+                            }
+                        },
+                        //then go get objects
                         new Sequence
                         {
+                            //move to center
+                            new GetRandomPoint { Radius = 50, Output = moveTarget },
+                            new RotateTo { Target = moveTarget },
+                            new MoveTo { Target = moveTarget },
+                            //start searching
                             new Selector
                             {
                                 //an object is present in the field of view of an agent
@@ -238,7 +272,7 @@ public class BTAgentRisky : MonoBehaviour
                                     {
                                         new Sequence
                                         {
-                                            new GetRandomPoint { Radius = 50, Output = moveTarget }, 
+                                            new GetRandomPoint { Radius = 50, Output = moveTarget },
                                             new RotateTo { Target = moveTarget },
                                             new MoveTo { Target = moveTarget },
                                             //look for an object on the fov
@@ -252,7 +286,7 @@ public class BTAgentRisky : MonoBehaviour
                                     new PickUp { Object = obj }
                                 }
                             }
-                        },
+                        }
                     }
                 }
             }

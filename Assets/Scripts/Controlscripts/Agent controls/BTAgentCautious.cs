@@ -31,6 +31,17 @@ public class BTAgentCautious : MonoBehaviour
                 //here I need a switch to different paths basing on current agent condition
                 new Selector
                 {
+                    //path 0: leave danger zone!
+                    new CheckDanger
+                    {
+                        new Sequence
+                        {
+                            //generate point out of danger
+                            new GetRandomPoint { Radius = 139, Output = moveTarget },
+                            new RotateTo { Target = moveTarget },
+                            new MoveTo { Target = moveTarget }
+                        }
+                    },
                     new CheckDying
                     {
                         //1st path - low HP
@@ -201,18 +212,44 @@ public class BTAgentCautious : MonoBehaviour
                             }
                         }
                     },
-                    new CheckOk
+                    //4th path - no conditions
+                    //can proceed to search for objects
+                    new Sequence
                     {
-                        //4th path - no conditions
-                        //can proceed to search for objects
-                        new Sequence
+                        new Selector
                         {
-                            new GetRandomPoint { Radius = 139, Output = moveTarget },
-                            new RotateTo { Target = moveTarget },
-                            new MoveTo { Target = moveTarget },
-                            new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
-                            new Wait { Time = waitTime}
-                        },
+                            //an object is present in the field of view of an agent
+                            new Sequence
+                            {
+                                //check object presence in the field of view
+                                new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj},
+                                //get object coordinates
+                                new RotateTo { Target = objCoords },
+                                new MoveTo { Target = objCoords },
+                                //grab an object and store it
+                                new PickUp { Object = obj }
+                            },
+                            //an object is nowhere to be found close
+                            new Sequence
+                            {
+                                new RepeatUntilSuccess
+                                {
+                                    new Sequence
+                                    {
+                                        new GetRandomPoint { Radius = 139, Output = moveTarget },
+                                        new RotateTo { Target = moveTarget },
+                                        new MoveTo { Target = moveTarget },
+                                        //look for an object on the fov
+                                        new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj}
+                                    }
+                                },
+                                //get object coordinates
+                                new RotateTo { Target = objCoords },
+                                new MoveTo { Target = objCoords },
+                                //grab an object and store it
+                                new PickUp { Object = obj }
+                            }
+                        }
                     }
                 }
             }

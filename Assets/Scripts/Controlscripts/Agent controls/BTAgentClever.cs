@@ -237,55 +237,52 @@ public class BTAgentClever : MonoBehaviour
                         }
                     },
 
-                    new CheckOk
+                    //4th path - no conditions
+                    //can proceed to search for objects
+                    //switch strategy based on the type of an actor 
+                    new Sequence
                     {
-                        //4th path - no conditions
-                        //can proceed to search for objects
-                        //switch strategy based on the type of an actor 
-                        new Sequence
+                        new DebugLog { Str = "Searching for goods" },
+                        new Selector
                         {
-                            new DebugLog { Str = "Searching for goods" },
-                            new Selector
+                            //an object is present in the field of view of an agent
+                            new Sequence
                             {
-                                //an object is present in the field of view of an agent
-                                new Sequence
-                                {
-                                    //check object presence in the field of view
-                                    new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj},
-                                    //get object coordinates
-                                    //new DebugLog { Str = "Target is " + target.ToString() }, //здесь 0
-                                    new RotateTo { Target = objCoords },
-                                    new MoveTo { Target = objCoords },
-                                    //grab an object and store it
-                                    new PickUp { Object = obj }
-                                },
+                                //check object presence in the field of view
+                                new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj},
+                                //get object coordinates
+                                //new DebugLog { Str = "Target is " + target.ToString() }, //здесь 0
+                                new RotateTo { Target = objCoords },
+                                new MoveTo { Target = objCoords },
+                                //grab an object and store it
+                                new PickUp { Object = obj }
+                            },
 
-                                //an object is nowhere to be found close
-                                new Sequence
+                            //an object is nowhere to be found close
+                            new Sequence
+                            {
+                                //new DebugLog { Str = "Target is " + target.ToString() },
+                                new RepeatUntilSuccess
                                 {
-                                    //new DebugLog { Str = "Target is " + target.ToString() },
-                                    new RepeatUntilSuccess
+                                    new Sequence
                                     {
-                                        new Sequence
-                                        {
-                                            new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
-                                            //parallel!
-                                            new RotateTo { Target = moveTarget },
-                                            new MoveTo { Target = moveTarget },
-                                            //look for an object on the fov
-                                            new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj}
-                                            //once an object is found, return success
+                                        new GetRandomPoint { Radius = 139, Output = moveTarget }, //Radius must depend on agent type and type of object to search for!
+                                        //parallel!
+                                        new RotateTo { Target = moveTarget },
+                                        new MoveTo { Target = moveTarget },
+                                        //look for an object on the fov
+                                        new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj}
+                                        //once an object is found, return success
                         
-                                        }
-                                    },
-                                    //get object coordinates
-                                    new RotateTo { Target = objCoords },
-                                    new MoveTo { Target = objCoords },
-                                    //grab an object and store it
-                                    new PickUp { Object = obj }
-                                }
+                                    }
+                                },
+                                //get object coordinates
+                                new RotateTo { Target = objCoords },
+                                new MoveTo { Target = objCoords },
+                                //grab an object and store it
+                                new PickUp { Object = obj }
                             }
-                        },
+                        }
                     }    
                 }
             }

@@ -96,54 +96,50 @@ public class BTAgent : MonoBehaviour
                         }
                     },
 
-                    new CheckOk
+                    //4th path - no conditions
+                    //can proceed to search for objects
+                    //switch strategy based on the type of an actor
+                    new CheckType
                     {
-                        //4th path - no conditions
-                        //can proceed to search for objects
-                        //switch strategy based on the type of an actor
-                        new CheckType
+                        //0 - clever population
+                        new Sequence
                         {
-                            //0 - clever population
-                            new Sequence
-                            {
-                                new GetRandomPoint { Radius = 139, Output = moveTarget },
-                                new RotateTo { Target = moveTarget },
-                                new MoveTo { Target = moveTarget },
-                                new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
-                                new Wait { Time = waitTime}
-                            },
-                            //1 - cautious population
-                            //need to stay out of the center
-                            new Sequence
-                            {
-                                new GetRandomPoint { Radius = 139, Output = moveTarget },
-                                new RotateTo { Target = moveTarget },
-                                new MoveTo { Target = moveTarget },
-                                new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
-                                new Wait { Time = waitTime}
-                            },
-                            //2 - balanced population
-                            //true random 
-                            new Sequence
-                            {
-                                new DebugLog { Str = "Searching for goods" },
-                                new SetSearchTarget { Target = 3 },
-                                new SearchFor {  },
-                            },
-                            //3 - risky population
-                            //tries to stay as close to the center as possible
-                            new Sequence
-                            {
-                                //move to the center
-                                new GetRandomPoint { Radius = 50, Output = moveTarget },
-                                new RotateTo { Target = moveTarget },
-                                new MoveTo { Target = moveTarget },
-                                //search for goodies
-                                new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
-                                new Wait { Time = waitTime}
-                            }
+                            new GetRandomPoint { Radius = 139, Output = moveTarget },
+                            new RotateTo { Target = moveTarget },
+                            new MoveTo { Target = moveTarget },
+                            new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
+                            new Wait { Time = waitTime}
+                        },
+                        //1 - cautious population
+                        //need to stay out of the center
+                        new Sequence
+                        {
+                            new GetRandomPoint { Radius = 139, Output = moveTarget },
+                            new RotateTo { Target = moveTarget },
+                            new MoveTo { Target = moveTarget },
+                            new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
+                            new Wait { Time = waitTime}
+                        },
+                        //2 - balanced population
+                        //true random 
+                        new Sequence
+                        {
+                            new DebugLog { Str = "Searching for goods" },
+                            new SetSearchTarget { Target = 3 },
+                            new SearchFor {  },
+                        },
+                        //3 - risky population
+                        //tries to stay as close to the center as possible
+                        new Sequence
+                        {
+                            //move to the center
+                            new GetRandomPoint { Radius = 50, Output = moveTarget },
+                            new RotateTo { Target = moveTarget },
+                            new MoveTo { Target = moveTarget },
+                            //search for goodies
+                            new GetRandomFloat { Min = 0.5f, Max = 2f, Output = waitTime },
+                            new Wait { Time = waitTime}
                         }
-
                     }
                 }
             }

@@ -5,22 +5,15 @@ using BehaviourTrees;
 
 namespace BehaviourTrees
 {
-    public class CheckOk : Decorator
+    public class CheckDanger : Decorator
     {
-
         protected override NodeState OnRunning(ExecutionContext context)
         {
-
             SimpleContext cxt = (SimpleContext)context;
-
-            var actor = cxt.Actor;
-            var scr = actor.GetComponent<agentStateController>();
-            var conditionDying = Bindings.Create(() => scr.isDying());
-            var conditionHungry = Bindings.Create(() => scr.isHungry());
-            var conditionThirsty = Bindings.Create(() => scr.isThirsty());
-
-
-            if (!conditionDying.Get() && !conditionHungry.Get() && !conditionThirsty.Get())
+            var transform = cxt.Actor.transform;
+            Vector3 center = new Vector3(0, 0, 0);
+            var distance = Vector3.Distance(transform.position, center);
+            if (distance < 51.0f)
             {
                 Child.Execute(context);
                 return Child.State;

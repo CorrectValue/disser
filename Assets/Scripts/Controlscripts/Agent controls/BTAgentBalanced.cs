@@ -203,48 +203,41 @@ public class BTAgentBalanced : MonoBehaviour
                             }
                         }
                     },
-
-                    new CheckOk
+                    //4th path - no conditions
+                    //can proceed to search for objects
+                    new Selector
                     {
-                        //4th path - no conditions
-                        //can proceed to search for objects
+                        //an object is present in the field of view of an agent
                         new Sequence
                         {
-                            new Selector
-                            {
-                                //an object is present in the field of view of an agent
-                                new Sequence
-                                {
-                                    //check object presence in the field of view
-                                    new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj},
-                                    //get object coordinates
-                                    new RotateTo { Target = objCoords },
-                                    new MoveTo { Target = objCoords },
-                                    //grab an object and store it
-                                    new PickUp { Object = obj }
-                                },
-                                //an object is nowhere to be found close
-                                new Sequence
-                                {
-                                    new RepeatUntilSuccess
-                                    {
-                                        new Sequence
-                                        {
-                                            new GetRandomPoint { Radius = 139, Output = moveTarget }, 
-                                            new RotateTo { Target = moveTarget },
-                                            new MoveTo { Target = moveTarget },
-                                            //look for an object on the fov
-                                            new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj}
-                                        }
-                                    },
-                                    //get object coordinates
-                                    new RotateTo { Target = objCoords },
-                                    new MoveTo { Target = objCoords },
-                                    //grab an object and store it
-                                    new PickUp { Object = obj }
-                                }
-                            }
+                            //check object presence in the field of view
+                            new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj},
+                            //get object coordinates
+                            new RotateTo { Target = objCoords },
+                            new MoveTo { Target = objCoords },
+                            //grab an object and store it
+                            new PickUp { Object = obj }
                         },
+                        //an object is nowhere to be found close
+                        new Sequence
+                        {
+                            new RepeatUntilSuccess
+                            {
+                                new Sequence
+                                {
+                                    new GetRandomPoint { Radius = 139, Output = moveTarget }, 
+                                    new RotateTo { Target = moveTarget },
+                                    new MoveTo { Target = moveTarget },
+                                    //look for an object on the fov
+                                    new LookFor { targetObject = 3, Output = objCoords, OutputObj = obj}
+                                }
+                            },
+                            //get object coordinates
+                            new RotateTo { Target = objCoords },
+                            new MoveTo { Target = objCoords },
+                            //grab an object and store it
+                            new PickUp { Object = obj }
+                        }
                     }
                 }
             }
